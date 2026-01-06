@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts vs. Individuals | Virtuous Training</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1f2937;
+            --paper: #ffffff;
+            --muted: #6b7280;
+            --accent: #0f766e;
+            --accent-light: #ccfbf1;
+            --border: #e5e7eb;
+            --warm: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f9fafb;
+            color: var(--ink);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .article-container {
+            max-width: 620px;
+            margin: 0 auto;
+            background: var(--paper);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        /* Header */
+        .article-header {
+            padding: 48px 32px 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .category-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.25;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+
+        .article-meta {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        /* Content */
+        .article-content {
+            padding: 32px;
+        }
+
+        .lead {
+            font-size: 18px;
+            color: var(--muted);
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        h2 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 36px;
+            margin-bottom: 16px;
+            color: var(--ink);
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        /* Callout boxes */
+        .callout {
+            background: var(--accent-light);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            margin: 28px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .callout-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .callout p {
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .warning {
+            background: #fef3c7;
+            border-left-color: var(--warm);
+        }
+
+        .warning .callout-label {
+            color: #b45309;
+        }
+
+        /* Example box */
+        .example-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 28px 0;
+        }
+
+        .example-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .example-scenario {
+            font-size: 15px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .example-result {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .example-result strong {
+            color: var(--accent);
+        }
+
+        /* Quick reference */
+        .quick-ref {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 28px 0;
+        }
+
+        .ref-card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .ref-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
+
+        .ref-card p {
+            font-size: 13px;
+            margin: 0;
+            color: var(--muted);
+        }
+
+        /* Cross reference */
+        .cross-ref {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        /* Summary */
+        .summary {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0 0;
+        }
+
+        .summary h3 {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #166534;
+            margin-bottom: 12px;
+        }
+
+        .summary ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary li {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: var(--ink);
+        }
+
+        .summary li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        .article-footer {
+            padding: 24px 32px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 26px; }
+            .article-header, .article-content, .article-footer { padding-left: 20px; padding-right: 20px; }
+            .quick-ref { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <article class="article-container">
+        <header class="article-header">
+            <div class="category-label">Foundational Concepts</div>
+            <h1>Contacts vs. Individuals</h1>
+            <p class="article-meta">5 min read · Essential for all Virtuous users</p>
+        </header>
+
+        <div class="article-content">
+            <p class="lead">This is the single most important concept in Virtuous. Get this right, and everything else makes sense. Get it wrong, and you'll create data problems that affect everyone.</p>
+
+            <p>Virtuous uses a two-level structure that mirrors how relationships actually work. Understanding it isn't just about following rules—it's about understanding <em>why</em> donor data is organized this way.</p>
+
+            <h2>The Short Version</h2>
+
+            <p><strong>Contact</strong> = The entity that receives mail and makes gifts. It's the tax filing unit. There are three types: Households (families), Organizations (businesses), and Foundations (grant-makers).</p>
+
+            <p><strong>Individual</strong> = An actual person within that contact. Every contact must have at least one. Households typically have one or two (spouses). Organizations have employees.</p>
+
+            <div class="quick-ref">
+                <div class="ref-card">
+                    <h4>Contact-Level Data</h4>
+                    <p>Gifts, pledges, mailing address, tags, notes, tasks</p>
+                </div>
+                <div class="ref-card">
+                    <h4>Individual-Level Data</h4>
+                    <p>Email, phone, birthday, event attendance, volunteer hours</p>
+                </div>
+            </div>
+
+            <h2>Why It's Designed This Way</h2>
+
+            <p>Think about how married couples handle finances. When John and Jane Smith give $1,000, they might file that as a joint tax deduction—regardless of whose name was on the check. The IRS sees them as one unit.</p>
+
+            <p>Virtuous works the same way. Gifts attach to the <strong>contact</strong> (the Smith Household), not to John or Jane individually. This means:</p>
+
+            <p>• Combined giving history is tracked accurately<br>
+            • Tax receipts go to the right address<br>
+            • Both spouses can be contacted appropriately</p>
+
+            <p>But John and Jane are still different people with different email addresses and different communication preferences. That's why <strong>individuals</strong> exist within the contact—to track person-specific details.</p>
+
+            <h2>The Golden Rule</h2>
+
+            <div class="callout">
+                <div class="callout-label">Remember This</div>
+                <p><strong>One person = One individual record.</strong> Never create duplicate individuals. If someone appears in multiple contexts (home and work), use Relationships to connect them.</p>
+            </div>
+
+            <p>This is where people make mistakes. Imagine John Smith is both a household donor AND a board member at ABC Foundation. The instinct is to create "John Smith" in both places.</p>
+
+            <p><strong>Don't.</strong></p>
+
+            <p>If you do, you've split his information across two records. Half his emails go to one, half to another. His complete giving history is fragmented. Nobody can see the full picture.</p>
+
+            <h2>The Right Way: Placeholders + Relationships</h2>
+
+            <div class="example-box">
+                <div class="example-label">Example Scenario</div>
+                <div class="example-scenario">John Smith is married to Jane. They're donors. John is also on the board of ABC Foundation.</div>
+                <div class="example-result">
+                    <strong>Correct setup:</strong><br>
+                    • Create the Smith Household with John and Jane as individuals (full profiles)<br>
+                    • Create ABC Foundation as an organization<br>
+                    • Add "John Smith (ABC)" as a <em>placeholder</em> individual on ABC Foundation<br>
+                    • Link the placeholder to the real John via a Relationship
+                </div>
+            </div>
+
+            <p>Now John's full profile lives in one place (his household), but he's connected to ABC Foundation. Anyone looking at either record can see the relationship.</p>
+
+            <div class="callout">
+                <div class="callout-label">Reading Relationships</div>
+                <p>Relationships in Virtuous are created and read <strong>right to left</strong>. If you see: <code>[Contact A] ← "is the parent of" ← [Contact B]</code>, it reads as "Contact B is the parent of Contact A." Keep this in mind when creating or interpreting relationship links.</p>
+            </div>
+
+            <div class="callout warning">
+                <div class="callout-label">TMC Policy</div>
+                <p>"Everyone lives at home." Place a person's full profile in their household contact. Use placeholder records with Relationships for organizational affiliations. <span class="cross-ref">→ See: The Big Picture</span></p>
+            </div>
+
+            <h2>Primary vs. Secondary Individuals</h2>
+
+            <p>Within a household, one person is designated <strong>Primary</strong> and another (usually the spouse) is <strong>Secondary</strong>. This affects:</p>
+
+            <p>• <strong>Contact Name</strong> (addressee): "The John and Jane Smith Household"<br>
+            • <strong>Informal Name</strong> (salutation): "Dear John and Jane"<br>
+            • Default communication routing</p>
+
+            <p>The order matters for mail merge and formal communications. Virtuous auto-generates these from individual names, so keep individual names in proper case (not ALL CAPS).</p>
+
+            <h2>What About Organizations?</h2>
+
+            <p>Organizations and Foundations work slightly differently. They still need at least one individual (usually a contact person), but:</p>
+
+            <p>• The Contact Name is set manually (e.g., "ABC Foundation")<br>
+            • The Informal Name is set manually (e.g., "Dear Director")<br>
+            • Employees are often placeholders linked to their household records</p>
+
+            <p>The principle remains: <strong>don't duplicate people</strong>. If Sarah is the Executive Director of ABC Foundation and also a personal donor, her full profile lives in her household. ABC Foundation gets a placeholder.</p>
+
+            <div class="summary">
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li><strong>Contacts</strong> are entities (households, organizations, foundations)</li>
+                    <li><strong>Individuals</strong> are people within those contacts</li>
+                    <li>Gifts attach to contacts (the tax unit), not individuals</li>
+                    <li>One person = one individual record—use Relationships, not duplicates</li>
+                    <li>Full profiles live in households; organizations get placeholders</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer class="article-footer">
+            The Mailbox Club · Virtuous CRM Training<br>
+            Related: <span class="cross-ref">The Big Picture</span> · <span class="cross-ref">Campaigns and Projects</span>
+        </footer>
+    </article>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtuous Training Resources</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1f2937;
+            --paper: #ffffff;
+            --muted: #6b7280;
+            --accent: #0f766e;
+            --accent-light: #ccfbf1;
+            --border: #e5e7eb;
+            --warm: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f9fafb;
+            color: var(--ink);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--paper);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            min-height: 100vh;
+        }
+
+        .header {
+            padding: 48px 32px 32px;
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1.25;
+            color: var(--ink);
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--muted);
+        }
+
+        .content {
+            padding: 40px 32px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent-light);
+        }
+
+        .card-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .card {
+            display: block;
+            padding: 20px 24px;
+            background: #fafafa;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .card-title {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+
+        .card:hover .card-title {
+            color: var(--accent);
+        }
+
+        .card-description {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .footer {
+            padding: 24px 32px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Virtuous Training Resources</h1>
+            <p class="subtitle">Guides and documentation for working with Virtuous CRM</p>
+        </header>
+
+        <main class="content">
+            <section class="section">
+                <h2 class="section-title">Articles</h2>
+                <div class="card-list">
+                    <a href="article-contacts-vs-individuals.html" class="card">
+                        <div class="card-title">Contacts vs. Individuals</div>
+                        <div class="card-description">Understand the fundamental difference between Contacts and Individuals in Virtuous and when to use each.</div>
+                    </a>
+                    <a href="article-campaigns-and-projects.html" class="card">
+                        <div class="card-title">Campaigns and Projects</div>
+                        <div class="card-description">Learn how to organize your fundraising efforts using Campaigns and Projects in Virtuous.</div>
+                    </a>
+                    <a href="article-your-first-query.html" class="card">
+                        <div class="card-title">Your First Query</div>
+                        <div class="card-description">A step-by-step guide to building your first query and extracting data from Virtuous.</div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Reference Documents</h2>
+                <div class="card-list">
+                    <a href="virtuous-big-picture.html" class="card">
+                        <div class="card-title">Virtuous: The Big Picture</div>
+                        <div class="card-description">A comprehensive overview of the Virtuous platform, its core concepts, and how everything fits together.</div>
+                    </a>
+                    <a href="tmc-tags-reference.html" class="card">
+                        <div class="card-title">TMC Tags Reference</div>
+                        <div class="card-description">Complete reference guide for all TMC tags used in Virtuous for categorization and organization.</div>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            Training resources for Virtuous CRM
+        </footer>
+    </div>
+</body>
+</html>

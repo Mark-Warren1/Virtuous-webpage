@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaigns and Projects | Virtuous Training</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1f2937;
+            --paper: #ffffff;
+            --muted: #6b7280;
+            --accent: #7c3aed;
+            --accent-light: #ede9fe;
+            --border: #e5e7eb;
+            --campaign: #0891b2;
+            --campaign-light: #cffafe;
+            --project: #c2410c;
+            --project-light: #ffedd5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f9fafb;
+            color: var(--ink);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .article-container {
+            max-width: 620px;
+            margin: 0 auto;
+            background: var(--paper);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .article-header {
+            padding: 48px 32px 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .category-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.25;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+
+        .article-meta { font-size: 14px; color: var(--muted); }
+
+        .article-content { padding: 32px; }
+
+        .lead {
+            font-size: 18px;
+            color: var(--muted);
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        h2 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 36px;
+            margin-bottom: 16px;
+            color: var(--ink);
+        }
+
+        p { margin-bottom: 20px; }
+        strong { font-weight: 600; color: var(--ink); }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 28px 0;
+        }
+
+        .compare-card {
+            border-radius: 10px;
+            padding: 24px;
+        }
+
+        .compare-card.campaign {
+            background: var(--campaign-light);
+            border: 2px solid var(--campaign);
+        }
+
+        .compare-card.project {
+            background: var(--project-light);
+            border: 2px solid var(--project);
+        }
+
+        .compare-card h3 {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .compare-card.campaign h3 { color: var(--campaign); }
+        .compare-card.project h3 { color: var(--project); }
+
+        .compare-card .question {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--ink);
+        }
+
+        .compare-card p {
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: var(--ink);
+        }
+
+        .compare-card .examples {
+            font-size: 13px;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .callout {
+            background: var(--accent-light);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            margin: 28px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .callout-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .callout p { margin: 0; font-size: 15px; }
+
+        .flow-visual {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 28px;
+            margin: 28px 0;
+            text-align: center;
+        }
+
+        .flow-visual .label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .flow-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .flow-box {
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .flow-box.campaign {
+            background: var(--campaign-light);
+            border: 2px solid var(--campaign);
+            color: var(--campaign);
+        }
+
+        .flow-box.gift {
+            background: var(--ink);
+            color: white;
+        }
+
+        .flow-box.project {
+            background: var(--project-light);
+            border: 2px solid var(--project);
+            color: var(--project);
+        }
+
+        .flow-arrow { font-size: 20px; color: var(--muted); }
+
+        .scenario {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: 10px;
+            padding: 24px;
+            margin: 28px 0;
+        }
+
+        .scenario-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #b45309;
+            margin-bottom: 12px;
+        }
+
+        .scenario-question {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 16px;
+            font-style: italic;
+            margin-bottom: 12px;
+            color: var(--ink);
+        }
+
+        .scenario-answer { font-size: 14px; color: var(--muted); }
+        .scenario-answer strong { color: var(--ink); }
+
+        .cross-ref {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .summary {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0 0;
+        }
+
+        .summary h3 {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #166534;
+            margin-bottom: 12px;
+        }
+
+        .summary ul { margin: 0; padding-left: 20px; }
+        .summary li { font-size: 14px; margin-bottom: 8px; color: var(--ink); }
+        .summary li:last-child { margin-bottom: 0; }
+
+        .article-footer {
+            padding: 24px 32px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 26px; }
+            .article-header, .article-content, .article-footer { padding-left: 20px; padding-right: 20px; }
+            .comparison { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <article class="article-container">
+        <header class="article-header">
+            <div class="category-label">Understanding the System</div>
+            <h1>Campaigns and Projects</h1>
+            <p class="article-meta">4 min read · How giving is organized and tracked</p>
+        </header>
+
+        <div class="article-content">
+            <p class="lead">When a gift comes in, it doesn't just sit in a pile. Virtuous tracks two different things about every gift: what prompted it (Campaign) and what it supports (Project). Understanding this distinction unlocks powerful reporting.</p>
+
+            <h2>The Core Difference</h2>
+
+            <p>Every gift answers two questions. Campaigns and Projects exist to capture both answers separately—because they serve different purposes.</p>
+
+            <div class="comparison">
+                <div class="compare-card campaign">
+                    <h3>Campaign</h3>
+                    <div class="question">"Why did they give?"</div>
+                    <p>The marketing effort, appeal, or event that prompted the gift. It's about <strong>attribution</strong>—what worked to inspire the donation.</p>
+                    <div class="examples">Examples: "2025 Year-End Appeal," "Spring Gala," "Monthly Newsletter"</div>
+                </div>
+                <div class="compare-card project">
+                    <h3>Project</h3>
+                    <div class="question">"What does it fund?"</div>
+                    <p>The designated purpose or fund for the gift. It's about <strong>allocation</strong>—where the money goes.</p>
+                    <div class="examples">Examples: "General Operating," "Scholarship Fund," "Building Campaign"</div>
+                </div>
+            </div>
+
+            <div class="flow-visual">
+                <div class="label">Every Gift Connects to Both</div>
+                <div class="flow-row">
+                    <div class="flow-box campaign">Campaign</div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-box gift">$500 Gift</div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-box project">Project</div>
+                </div>
+            </div>
+
+            <h2>Why This Separation Matters</h2>
+
+            <p>Imagine your organization sends a year-end appeal asking donors to support scholarships. A donor gives $1,000.</p>
+
+            <p>Six months later, someone asks: "How much did the year-end appeal raise?" Another person asks: "How much have we raised for scholarships this year?"</p>
+
+            <p>These are <em>different questions</em>. The first is about marketing effectiveness (Campaign). The second is about fund totals (Project). Virtuous lets you answer both because it tracks both.</p>
+
+            <div class="scenario">
+                <div class="scenario-label">Real Example</div>
+                <div class="scenario-question">"How effective was our spring mailing?"</div>
+                <div class="scenario-answer"><strong>Look at Campaign results.</strong> This shows you how many gifts came in response to that specific appeal, regardless of which fund donors designated.</div>
+            </div>
+
+            <div class="scenario">
+                <div class="scenario-label">Real Example</div>
+                <div class="scenario-question">"How much have we raised for the building fund?"</div>
+                <div class="scenario-answer"><strong>Look at Project totals.</strong> This shows all gifts designated to that fund, regardless of which appeal prompted them.</div>
+            </div>
+
+            <h2>Think of It Like a Store</h2>
+
+            <p>If you're familiar with retail analytics, this might help: Campaign is like tracking which advertisement brought the customer in. Project is like tracking which product they bought.</p>
+
+            <p>A customer might see a TV commercial (Campaign: "Holiday TV Spot") and buy a jacket (Project: "Winter Apparel"). You want to know both—which ads drive traffic AND which products sell.</p>
+
+            <h2>How This Shows Up on Contact Records</h2>
+
+            <p>When you view a contact's giving history, you'll see both pieces of information on each gift:</p>
+
+            <p>• <strong>Segment</strong>: The specific communication within a Campaign (e.g., "Email #2 of Year-End Appeal")<br>
+            • <strong>Project</strong>: Where the money was designated</p>
+
+            <p>This is also reflected in Contact Statistics. Fields like "First Gift Segment Code" tell you which campaign effort first acquired that donor—valuable for understanding which marketing channels work best. <span class="cross-ref">→ See: The Big Picture</span></p>
+
+            <div class="callout">
+                <div class="callout-label">For Caseload Workers</div>
+                <p>You probably won't create Campaigns or Projects—that's typically handled by development leadership. But understanding them helps you interpret donor records and have informed conversations. When you see a gift came from the "Spring Gala Campaign," you know that donor attended the event.</p>
+            </div>
+
+            <h2>The Structure: Campaigns Contain Segments</h2>
+
+            <p>Campaigns aren't just single items—they're containers. A Campaign like "2025 Year-End Appeal" might include multiple Segments:</p>
+
+            <p>• Email blast #1 (November)<br>
+            • Direct mail piece (November)<br>
+            • Email blast #2 (December)<br>
+            • Social media push (December)</p>
+
+            <p>Each Segment tracks responses separately, so you can see which specific touchpoint drove the gift. This granularity is powerful for optimizing future campaigns.</p>
+
+            <h2>Projects Can Have Hierarchy Too</h2>
+
+            <p>Some organizations have simple fund structures (maybe just "General" and "Restricted"). Others have complex hierarchies:</p>
+
+            <p>• Programs<br>
+            &nbsp;&nbsp;&nbsp;↳ Scholarship Fund<br>
+            &nbsp;&nbsp;&nbsp;↳ International Outreach<br>
+            • Operations<br>
+            &nbsp;&nbsp;&nbsp;↳ General Operating<br>
+            &nbsp;&nbsp;&nbsp;↳ Staff Development</p>
+
+            <p>The structure depends on your organization's needs. What matters is that every gift gets assigned to a Project so the money is properly tracked.</p>
+
+            <div class="summary">
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li><strong>Campaign</strong> = What prompted the gift (marketing attribution)</li>
+                    <li><strong>Project</strong> = What the gift funds (financial allocation)</li>
+                    <li>Every gift connects to both—they answer different questions</li>
+                    <li>Campaigns contain Segments (individual touchpoints)</li>
+                    <li>Understanding this helps you read donor records accurately</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer class="article-footer">
+            The Mailbox Club · Virtuous CRM Training<br>
+            Related: <span class="cross-ref">Contacts vs. Individuals</span> · <span class="cross-ref">Your First Query</span>
+        </footer>
+    </article>
+</body>
+</html>

@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMC Tags Reference</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1a1a;
+            --paper: #fdfcfa;
+            --muted: #6b6b6b;
+            --border: #e0dcd4;
+            --diagram-bg: #f8f6f2;
+            
+            /* Category colors */
+            --comm-bg: #fef2f2;
+            --comm-border: #dc2626;
+            --comm-text: #991b1b;
+            
+            --capacity-bg: #eff6ff;
+            --capacity-border: #2563eb;
+            --capacity-text: #1e40af;
+            
+            --system-bg: #f0fdf4;
+            --system-border: #16a34a;
+            --system-text: #166534;
+            
+            --legacy-bg: #faf5ff;
+            --legacy-border: #9333ea;
+            --legacy-text: #6b21a8;
+            
+            --receipting-bg: #fffbeb;
+            --receipting-border: #d97706;
+            --receipting-text: #92400e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--comm-border);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            color: var(--ink);
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: var(--muted);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .updated {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 12px;
+        }
+
+        /* Quick Nav */
+        .quick-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--diagram-bg);
+            border-radius: 12px;
+        }
+
+        .nav-pill {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: transform 0.15s ease;
+        }
+
+        .nav-pill:hover {
+            transform: translateY(-1px);
+        }
+
+        .nav-pill.comm { background: var(--comm-bg); color: var(--comm-text); border: 1px solid var(--comm-border); }
+        .nav-pill.receipting { background: var(--receipting-bg); color: var(--receipting-text); border: 1px solid var(--receipting-border); }
+        .nav-pill.capacity { background: var(--capacity-bg); color: var(--capacity-text); border: 1px solid var(--capacity-border); }
+        .nav-pill.system { background: var(--system-bg); color: var(--system-text); border: 1px solid var(--system-border); }
+        .nav-pill.legacy { background: var(--legacy-bg); color: var(--legacy-text); border: 1px solid var(--legacy-border); }
+
+        /* Section */
+        .tag-section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .section-icon.comm { background: var(--comm-bg); border: 1px solid var(--comm-border); }
+        .section-icon.receipting { background: var(--receipting-bg); border: 1px solid var(--receipting-border); }
+        .section-icon.capacity { background: var(--capacity-bg); border: 1px solid var(--capacity-border); }
+        .section-icon.system { background: var(--system-bg); border: 1px solid var(--system-border); }
+        .section-icon.legacy { background: var(--legacy-bg); border: 1px solid var(--legacy-border); }
+
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .section-intro {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 20px;
+            padding-left: 52px;
+        }
+
+        /* Tag Cards */
+        .tag-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .tag-card {
+            background: white;
+            border-radius: 10px;
+            padding: 16px 20px;
+            border: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            align-items: start;
+        }
+
+        .tag-card:hover {
+            border-color: #ccc;
+        }
+
+        .tag-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+
+        .tag-description {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .tag-badge {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .badge-manual {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .badge-auto {
+            background: var(--system-bg);
+            color: var(--system-text);
+        }
+
+        .badge-research {
+            background: var(--capacity-bg);
+            color: var(--capacity-text);
+        }
+
+        .badge-imported {
+            background: var(--legacy-bg);
+            color: var(--legacy-text);
+        }
+
+        /* Capacity Table */
+        .capacity-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .capacity-table th {
+            text-align: left;
+            padding: 10px 12px;
+            background: var(--capacity-bg);
+            color: var(--capacity-text);
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .capacity-table th:first-child {
+            border-radius: 8px 0 0 0;
+        }
+
+        .capacity-table th:last-child {
+            border-radius: 0 8px 0 0;
+        }
+
+        .capacity-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .capacity-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .capacity-table tr:last-child td:first-child {
+            border-radius: 0 0 0 8px;
+        }
+
+        .capacity-table tr:last-child td:last-child {
+            border-radius: 0 0 8px 0;
+        }
+
+        .capacity-table .tag-col {
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .capacity-table .range-col {
+            color: var(--muted);
+        }
+
+        .capacity-table .potential-col {
+            color: var(--capacity-text);
+            font-size: 12px;
+        }
+
+        /* Key concept box */
+        .key-box {
+            background: #fefce8;
+            border: 1px solid #facc15;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 24px 0;
+        }
+
+        .key-box-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #a16207;
+            margin-bottom: 8px;
+        }
+
+        .key-box p {
+            font-size: 14px;
+            color: var(--ink);
+            margin: 0;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 26px; }
+            .container { padding: 32px 16px; }
+            .section-intro { padding-left: 0; margin-top: 12px; }
+            .tag-card { grid-template-columns: 1fr; }
+            .tag-badge { justify-self: start; margin-top: 8px; }
+            .capacity-table { font-size: 12px; }
+            .capacity-table th, .capacity-table td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-label">Quick Reference</div>
+            <h1>TMC Tags Reference</h1>
+            <p class="subtitle">All active tags used at The Mailbox Club, organized by category with clear definitions</p>
+            <p class="updated">Last updated: November 2024</p>
+        </header>
+
+        <nav class="quick-nav">
+            <a href="#communication" class="nav-pill comm">Communication</a>
+            <a href="#receipting" class="nav-pill receipting">Receipting</a>
+            <a href="#capacity" class="nav-pill capacity">Capacity & Wealth</a>
+            <a href="#system" class="nav-pill system">System Tags</a>
+            <a href="#legacy" class="nav-pill legacy">Imported/Legacy</a>
+        </nav>
+
+        <!-- Communication Preferences -->
+        <section class="tag-section" id="communication">
+            <div class="section-header">
+                <div class="section-icon comm">🚫</div>
+                <div>
+                    <h2 class="section-title">Communication Preferences</h2>
+                    <p class="section-subtitle">What donors have asked NOT to receive</p>
+                </div>
+            </div>
+            <p class="section-intro">Apply these immediately when a donor expresses a preference. These tags are used to exclude contacts from mailings, calls, and campaigns.</p>
+
+            <div class="tag-grid">
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">Do not call</div>
+                        <div class="tag-description">Contact has requested no phone calls. Exclude from phone campaigns and cold calling lists.</div>
+                    </div>
+                    <span class="tag-badge badge-manual">Manual</span>
+                </div>
+
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">No direct mail</div>
+                        <div class="tag-description">Contact does not want any physical mail. Exclude from all print communications—appeals, newsletters, updates, and event invitations.</div>
+                    </div>
+                    <span class="tag-badge badge-manual">Manual</span>
+                </div>
+
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">No email</div>
+                        <div class="tag-description">Contact has opted out of all email. Exclude from all email communications—appeals, newsletters, and updates.</div>
+                    </div>
+                    <span class="tag-badge badge-manual">Manual</span>
+                </div>
+
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">No appeals</div>
+                        <div class="tag-description">Contact wishes to receive no solicitations. Exclude from all fundraising appeals across every channel. They can still receive informational content (newsletters, ministry updates, thank-yous, receipts).</div>
+                    </div>
+                    <span class="tag-badge badge-manual">Manual</span>
+                </div>
+            
+            <div class="key-box">
+                <div class="key-box-label">Understanding the Permutations</div>
+                <p>These tags mean exactly what they say. <strong>"No direct mail"</strong> blocks ALL physical mail. <strong>"No email"</strong> blocks ALL email. <strong>"No appeals"</strong> blocks only solicitations (informational content is still okay).</p>
+                <p style="margin-top: 12px;"><strong>Example:</strong> A contact tagged "No direct mail" + "No appeals" can still receive informational <em>emails</em>—just no physical mail of any kind, and no appeals through any channel. As we shift toward informational approaches, these distinctions matter for reaching people appropriately.</p>
+            </div>
+            </div>
+        </section>
+
+        <!-- Receipting Tags -->
+        <section class="tag-section" id="receipting">
+            <div class="section-header">
+                <div class="section-icon receipting">🧾</div>
+                <div>
+                    <h2 class="section-title">Receipting Preferences</h2>
+                    <p class="section-subtitle">How donors want their tax documents handled</p>
+                </div>
+            </div>
+            <p class="section-intro">These tags control automated receipting. When in doubt about a donor's preference, ask them directly or check their notes.</p>
+
+            <div class="tag-grid">
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">No receipts but annual statements</div>
+                        <div class="tag-description">Contact wants only a year-end summary, not individual gift receipts. Filter from individual gift receipt batches; include ONLY in annual statement distribution.</div>
+                    </div>
+                    <span class="tag-badge badge-manual">Manual</span>
+                </div>
+
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">No Receipts or Statements</div>
+                        <div class="tag-description">Contact explicitly declined all tax documents. Exclude from all receipting processes. Document the donor's explicit request in Notes.</div>
+                    </div>
+                    <span class="tag-badge badge-manual">Manual</span>
+                </div>
+
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">Special Receipting</div>
+                        <div class="tag-description">Contact requires manual/custom printed receipts. Exclude from automated receipting batches; flag for manual processing with custom formatting.</div>
+                    </div>
+                    <span class="tag-badge badge-manual">Manual</span>
+                </div>
+            </div>
+
+            <div class="key-box">
+                <div class="key-box-label">Important</div>
+                <p>If a donor mentions any receipting preference during a call, add a Note documenting the conversation AND apply the appropriate tag. Both are needed for proper tracking.</p>
+            </div>
+        </section>
+
+        <!-- Capacity & Wealth -->
+        <section class="tag-section" id="capacity">
+            <div class="section-header">
+                <div class="section-icon capacity">💎</div>
+                <div>
+                    <h2 class="section-title">Capacity & Wealth Indicators</h2>
+                    <p class="section-subtitle">Research-based giving potential</p>
+                </div>
+            </div>
+            <p class="section-intro">These tags typically come from wealth screening or research. Review and update annually. Use for donor segmentation and portfolio assignments.</p>
+
+            <table class="capacity-table">
+                <thead>
+                    <tr>
+                        <th>Tag</th>
+                        <th>Asset Range</th>
+                        <th>Giving Potential</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tag-col">Capacity 100–250k</td>
+                        <td class="range-col">$100,000–$250,000</td>
+                        <td class="potential-col">$1,000–$5,000 annually</td>
+                    </tr>
+                    <tr>
+                        <td class="tag-col">Capacity 250–500k</td>
+                        <td class="range-col">$250,000–$500,000</td>
+                        <td class="potential-col">$5,000–$15,000 annually</td>
+                    </tr>
+                    <tr>
+                        <td class="tag-col">Capacity 500k–1M</td>
+                        <td class="range-col">$500,000–$1,000,000</td>
+                        <td class="potential-col">$15,000–$50,000 over time</td>
+                    </tr>
+                    <tr>
+                        <td class="tag-col">Capacity 1M–3M</td>
+                        <td class="range-col">$1,000,000–$3,000,000</td>
+                        <td class="potential-col">$50,000–$150,000+ with cultivation</td>
+                    </tr>
+                    <tr>
+                        <td class="tag-col">Capacity 3M+</td>
+                        <td class="range-col">$3,000,000+</td>
+                        <td class="potential-col">$150,000+ (major/transformational)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tag-grid" style="margin-top: 24px;">
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">High Liquidity</div>
+                        <div class="tag-description">Easily accessible cash/investable assets. Indicates increased near-term giving capacity; strong candidate for immediate asks.</div>
+                    </div>
+                    <span class="tag-badge badge-research">Research</span>
+                </div>
+
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">Real Estate 500k+</div>
+                        <div class="tag-description">Property valued at $500k+. Indicates higher asset base. Consider property-related giving vehicles.</div>
+                    </div>
+                    <span class="tag-badge badge-research">Research</span>
+                </div>
+
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">Business Owner</div>
+                        <div class="tag-description">Owns a business. Increased earning potential and complex assets. Explore corporate giving and stock gifts.</div>
+                    </div>
+                    <span class="tag-badge badge-research">Research</span>
+                </div>
+
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">Major Gift Likely</div>
+                        <div class="tag-description">Strong indicators of ability and inclination for significant gift. Assign major gift officer; develop cultivation plan.</div>
+                    </div>
+                    <span class="tag-badge badge-research">Research</span>
+                </div>
+
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">Legacy Gift Likely</div>
+                        <div class="tag-description">Good candidate for planned or estate-related gifts. Introduce planned giving options; share legacy stories.</div>
+                    </div>
+                    <span class="tag-badge badge-research">Research</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Tags -->
+        <section class="tag-section" id="system">
+            <div class="section-header">
+                <div class="section-icon system">⚡</div>
+                <div>
+                    <h2 class="section-title">System Tags (Automated)</h2>
+                    <p class="section-subtitle">Applied automatically based on giving behavior</p>
+                </div>
+            </div>
+            <p class="section-intro">You don't apply these—Virtuous updates them automatically. Use them to identify re-engagement opportunities.</p>
+
+            <div class="tag-grid">
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">Prelapsed Donor</div>
+                        <div class="tag-description">Donors who have not given in <strong>6 months</strong>. Early warning signal—great time for a personal touchpoint before they fully lapse.</div>
+                    </div>
+                    <span class="tag-badge badge-auto">Auto</span>
+                </div>
+
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">Lapsed Donor</div>
+                        <div class="tag-description">Donors who have not given in <strong>1 year</strong>. Priority for re-engagement campaigns and personal outreach.</div>
+                    </div>
+                    <span class="tag-badge badge-auto">Auto</span>
+                </div>
+            </div>
+
+            <div class="key-box">
+                <div class="key-box-label">Pro Tip</div>
+                <p>Build a query for "Prelapsed Donors" in your caseload. A quick phone call at 6 months can prevent full lapse—and it's much easier to retain a donor than win them back.</p>
+            </div>
+        </section>
+
+        <!-- Legacy/Imported Tags -->
+        <section class="tag-section" id="legacy">
+            <div class="section-header">
+                <div class="section-icon legacy">📦</div>
+                <div>
+                    <h2 class="section-title">Imported & Legacy Tags</h2>
+                    <p class="section-subtitle">Historical data from previous systems</p>
+                </div>
+            </div>
+            <p class="section-intro">These tags were migrated from our previous database. They provide historical context but may need verification.</p>
+
+            <div class="tag-grid">
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">RTS (Return to Sender)</div>
+                        <div class="tag-description">Mail returned—address is likely outdated or invalid. Verify address before sending additional mail. <em>Note: Legacy data may show variations like "Address Unknown," "No Forward," or "Not Deliverable"—these are being consolidated into a single RTS tag.</em></div>
+                    </div>
+                    <span class="tag-badge badge-imported">Imported</span>
+                </div>
+
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">Mail Order customer</div>
+                        <div class="tag-description">Historical mail-order catalog customers. May not be active donors.</div>
+                    </div>
+                    <span class="tag-badge badge-imported">Imported</span>
+                </div>
+
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">No Contact Info Provided - Online Gift</div>
+                        <div class="tag-description">Anonymous or minimal-info online donors. Limited outreach possible.</div>
+                    </div>
+                    <span class="tag-badge badge-imported">Imported</span>
+                </div>
+
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">European Addresses</div>
+                        <div class="tag-description">Contacts with European mailing addresses. May have different communication timing needs.</div>
+                    </div>
+                    <span class="tag-badge badge-imported">Imported</span>
+                </div>
+
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">African Addresses</div>
+                        <div class="tag-description">Contacts with African mailing addresses.</div>
+                    </div>
+                    <span class="tag-badge badge-imported">Imported</span>
+                </div>
+
+                <div class="tag-card">
+                    <div>
+                        <div class="tag-name">Australian Addresses</div>
+                        <div class="tag-description">Contacts with Australian mailing addresses.</div>
+                    </div>
+                    <span class="tag-badge badge-imported">Imported</span>
+                </div>
+            </div>
+
+            <div class="key-box">
+                <div class="key-box-label">What About Deceased Contacts?</div>
+                <p>When both individuals in a household are deceased, we use Virtuous's <strong>Archive</strong> feature rather than a tag. Archiving soft-removes the contact from active lists while preserving all giving data for historical reporting. Queries can still retrieve archived contacts when needed for analysis.</p>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>Questions? Contact Mark for tag clarifications or to request new tags.</p>
+        </footer>
+    </div>
+</body>
+</html>

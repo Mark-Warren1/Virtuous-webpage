@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your First Query | Virtuous Training</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1f2937;
+            --paper: #ffffff;
+            --muted: #6b7280;
+            --accent: #059669;
+            --accent-light: #d1fae5;
+            --border: #e5e7eb;
+            --code-bg: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f9fafb;
+            color: var(--ink);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .article-container {
+            max-width: 620px;
+            margin: 0 auto;
+            background: var(--paper);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .article-header {
+            padding: 48px 32px 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .category-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.25;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+
+        .article-meta { font-size: 14px; color: var(--muted); }
+
+        .article-content { padding: 32px; }
+
+        .lead {
+            font-size: 18px;
+            color: var(--muted);
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        h2 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 36px;
+            margin-bottom: 16px;
+            color: var(--ink);
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 28px;
+            margin-bottom: 12px;
+            color: var(--ink);
+        }
+
+        p { margin-bottom: 20px; }
+        strong { font-weight: 600; color: var(--ink); }
+
+        .callout {
+            background: var(--accent-light);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            margin: 28px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .callout-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .callout p { margin: 0; font-size: 15px; }
+
+        .warning {
+            background: #fef3c7;
+            border-left-color: #f59e0b;
+        }
+        .warning .callout-label { color: #b45309; }
+
+        /* Step boxes */
+        .step-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 50%;
+            margin-right: 12px;
+        }
+
+        .step-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 12px;
+        }
+
+        .step-content {
+            font-size: 15px;
+            color: var(--muted);
+            padding-left: 40px;
+        }
+
+        /* Query example */
+        .query-example {
+            background: var(--code-bg);
+            border-radius: 10px;
+            padding: 24px;
+            margin: 24px 0;
+            overflow-x: auto;
+        }
+
+        .query-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #94a3b8;
+            margin-bottom: 16px;
+        }
+
+        .query-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .query-row:last-child { margin-bottom: 0; }
+
+        .query-field {
+            background: #334155;
+            color: #e2e8f0;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+
+        .query-operator {
+            background: #059669;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .query-value {
+            background: #fbbf24;
+            color: #1e293b;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+
+        .query-connector {
+            color: #94a3b8;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Result preview */
+        .result-preview {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .result-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #166534;
+            margin-bottom: 12px;
+        }
+
+        .result-text {
+            font-size: 14px;
+            color: var(--ink);
+        }
+
+        /* Operator table */
+        .operator-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin: 20px 0;
+        }
+
+        .operator-table th {
+            text-align: left;
+            padding: 12px;
+            background: #f1f5f9;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--muted);
+        }
+
+        .operator-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .operator-table code {
+            background: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+
+        .cross-ref {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .summary {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0 0;
+        }
+
+        .summary h3 {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #166534;
+            margin-bottom: 12px;
+        }
+
+        .summary ul { margin: 0; padding-left: 20px; }
+        .summary li { font-size: 14px; margin-bottom: 8px; color: var(--ink); }
+        .summary li:last-child { margin-bottom: 0; }
+
+        .article-footer {
+            padding: 24px 32px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 26px; }
+            .article-header, .article-content, .article-footer { padding-left: 20px; padding-right: 20px; }
+            .query-row { gap: 8px; }
+            .query-field, .query-value { font-size: 12px; padding: 6px 10px; }
+        }
+    </style>
+</head>
+<body>
+    <article class="article-container">
+        <header class="article-header">
+            <div class="category-label">Getting Hands-On</div>
+            <h1>Your First Query</h1>
+            <p class="article-meta">6 min read · Finding exactly what you need</p>
+        </header>
+
+        <div class="article-content">
+            <p class="lead">All that structured data you've learned about—contacts, individuals, tags, gifts—becomes powerful when you can filter and find exactly what you need. That's what queries do. Think of them as saved searches with superpowers.</p>
+
+            <h2>What Queries Actually Are</h2>
+
+            <p>A query is a set of criteria that filters your database. Instead of scrolling through thousands of contacts hoping to find what you need, you tell Virtuous: "Show me all contacts where X is true."</p>
+
+            <p>For example: "Show me all households tagged 'Major Gift Likely' who gave over $1,000 last year but haven't given yet this year."</p>
+
+            <p>That's a query. It might return 47 contacts—exactly the list you need for a targeted outreach campaign.</p>
+
+            <div class="callout">
+                <div class="callout-label">Why This Matters</div>
+                <p>Queries are only as good as your data. If tags aren't applied consistently, if names aren't in proper case, if duplicates exist—your query results will be incomplete or messy. <strong>Every time you enter data correctly, you make queries more reliable for everyone.</strong> <span class="cross-ref">→ See: The Big Picture</span></p>
+            </div>
+
+            <h2>Running a Saved Query</h2>
+
+            <p>The easiest way to start is with queries someone else has already built. Your team likely has several saved queries for common needs.</p>
+
+            <div class="step-box">
+                <div class="step-title"><span class="step-number">1</span>Go to Queries</div>
+                <div class="step-content">From the main navigation, click <strong>More → Queries</strong> (or find it in your sidebar, depending on your setup).</div>
+            </div>
+
+            <div class="step-box">
+                <div class="step-title"><span class="step-number">2</span>Find a Saved Query</div>
+                <div class="step-content">Click on the <strong>Team Queries</strong> tab to see queries others have shared. You might see folders organized by team or purpose. Click on a query name to open it.</div>
+            </div>
+
+            <div class="step-box">
+                <div class="step-title"><span class="step-number">3</span>Run It</div>
+                <div class="step-content">Click <strong>Run Query</strong> (or it may run automatically). The results appear as a list you can scroll, sort, and act on.</div>
+            </div>
+
+            <p>That's it for running existing queries. Now let's build one from scratch.</p>
+
+            <h2>Building Your First Query</h2>
+
+            <p>We'll start simple. Let's find all contacts with the "Do not call" tag—useful if you want to exclude them from a phone outreach list.</p>
+
+            <h3>Step 1: Create a New Query</h3>
+            <p>From the Queries page, click <strong>New Query</strong>. You'll be asked to choose a Query Type. Select <strong>Contact Query</strong>—this searches at the contact level (households, organizations).</p>
+
+            <h3>Step 2: Add Your Criteria</h3>
+            <p>You'll see a criteria builder. Click <strong>Add Criteria</strong> and set up:</p>
+
+            <div class="query-example">
+                <div class="query-label">Query: Contacts Tagged "Do Not Call"</div>
+                <div class="query-row">
+                    <span class="query-field">Contact Tag</span>
+                    <span class="query-operator">Equals</span>
+                    <span class="query-value">Do not call</span>
+                </div>
+            </div>
+
+            <div class="result-preview">
+                <div class="result-label">What This Returns</div>
+                <div class="result-text">Every contact in your database that has the "Do not call" tag applied. You can then export this list to exclude from your phone campaign.</div>
+            </div>
+
+            <h3>Step 3: Run and Review</h3>
+            <p>Click <strong>Run Query</strong>. Review the results to make sure they look right. If the number seems off (way too high or too low), double-check your criteria.</p>
+
+            <h3>Step 4: Save It</h3>
+            <p>If you'll need this list again, click <strong>Save Query</strong>. Give it a clear name like "Contacts - Do Not Call" and choose a folder if your team uses them.</p>
+
+            <h2>A Slightly More Complex Example</h2>
+
+            <p>Let's try something more useful: finding lapsed donors in your caseload who might be worth a personal call.</p>
+
+            <div class="query-example">
+                <div class="query-label">Query: Lapsed Donors Worth Calling</div>
+                <div class="query-row">
+                    <span class="query-field">Contact Tag</span>
+                    <span class="query-operator">Equals</span>
+                    <span class="query-value">Lapsed Donor</span>
+                </div>
+                <div class="query-row">
+                    <span class="query-connector">AND</span>
+                </div>
+                <div class="query-row">
+                    <span class="query-field">Life to Date Giving</span>
+                    <span class="query-operator">Greater Than</span>
+                    <span class="query-value">500</span>
+                </div>
+                <div class="query-row">
+                    <span class="query-connector">AND</span>
+                </div>
+                <div class="query-row">
+                    <span class="query-field">Contact Tag</span>
+                    <span class="query-operator">Does Not Equal</span>
+                    <span class="query-value">Do not call</span>
+                </div>
+            </div>
+
+            <div class="result-preview">
+                <div class="result-label">What This Returns</div>
+                <div class="result-text">Contacts who: (1) haven't given in a year (Lapsed Donor tag), (2) have given at least $500 lifetime, and (3) haven't asked not to be called. These are valuable donors worth re-engaging personally.</div>
+            </div>
+
+            <p>Notice how we combined three criteria with AND. All conditions must be true for a contact to appear in results.</p>
+
+            <h2>Understanding Operators</h2>
+
+            <p>The operator is the comparison you're making. Here are the most common ones:</p>
+
+            <table class="operator-table">
+                <thead>
+                    <tr>
+                        <th>Operator</th>
+                        <th>Use When</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Equals</code></td>
+                        <td>Exact match. "Contact Tag Equals 'Major Gift Likely'"</td>
+                    </tr>
+                    <tr>
+                        <td><code>Does Not Equal</code></td>
+                        <td>Exclude matches. "Contact Tag Does Not Equal 'Deceased'"</td>
+                    </tr>
+                    <tr>
+                        <td><code>Greater Than</code></td>
+                        <td>Numbers above a threshold. "Life to Date Giving Greater Than 1000"</td>
+                    </tr>
+                    <tr>
+                        <td><code>Less Than</code></td>
+                        <td>Numbers below a threshold. "Last Gift Amount Less Than 100"</td>
+                    </tr>
+                    <tr>
+                        <td><code>Contains</code></td>
+                        <td>Partial text match. "Contact Name Contains 'Smith'"</td>
+                    </tr>
+                    <tr>
+                        <td><code>Is Empty</code></td>
+                        <td>Field has no value. "Email Is Empty" (finds contacts without email)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Query Types Matter</h2>
+
+            <p>When you create a new query, you choose a type. The two you'll use most:</p>
+
+            <p><strong>Contact Query</strong>: Searches contacts (households, organizations). Use this for most donor lists, mailing lists, and outreach campaigns.</p>
+
+            <p><strong>Gift Query</strong>: Searches individual gifts. Use this when you need to analyze giving patterns, find gifts within a date range, or look at specific campaigns/projects.</p>
+
+            <div class="callout warning">
+                <div class="callout-label">Common Mistake</div>
+                <p>Using a Gift Query when you want a list of people. A Gift Query might return the same contact multiple times (once per gift). If you want a list of donors, use a Contact Query with giving criteria.</p>
+            </div>
+
+            <h2>What Else Can You Do?</h2>
+
+            <p>Once you've run a query, you can:</p>
+
+            <p>• <strong>Export</strong> the results to Excel or CSV<br>
+            • <strong>Bulk Actions</strong>: Add tags, create tasks, or update fields for everyone in the results<br>
+            • <strong>Save</strong> the query to run again later<br>
+            • <strong>Customize columns</strong> to show exactly the fields you need</p>
+
+            <div class="callout">
+                <div class="callout-label">Export Pro Tip</div>
+                <p>When exporting, Virtuous lets you select which columns to include—and <strong>the order you select them is the order they'll appear in your Excel file</strong>. Even better: your column selections are saved with the query. So if you set up the perfect export once, it'll be ready the same way next time you run it.</p>
+            </div>
+
+            <p>Queries are the foundation of targeted outreach, reporting, and data hygiene. The more comfortable you get with them, the more value you'll extract from Virtuous.</p>
+
+            <div class="summary">
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li>Queries are saved searches that filter your database</li>
+                    <li>Start by running existing saved queries your team has built</li>
+                    <li>Choose the right Query Type (Contact vs. Gift)</li>
+                    <li>Combine criteria with AND to narrow results</li>
+                    <li>Good data = good query results—data integrity matters</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer class="article-footer">
+            The Mailbox Club · Virtuous CRM Training<br>
+            Related: <span class="cross-ref">TMC Tags Reference</span> · <span class="cross-ref">The Big Picture</span>
+        </footer>
+    </article>
+</body>
+</html>
