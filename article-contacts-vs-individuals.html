@@ -31,15 +31,47 @@
         }
 
         .article-container {
-            max-width: 620px;
+            max-width: 860px;
             margin: 0 auto;
             background: var(--paper);
             box-shadow: 0 1px 3px rgba(0,0,0,0.08);
         }
 
         /* Header */
+        .back-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            background: #2563eb;
+            text-decoration: none;
+            padding: 6px 16px;
+            border-radius: 4px;
+            margin: 16px 0 0 32px;
+        }
+
+        .back-link:hover {
+            background: #1d4ed8;
+        }
+
+        .home-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #fff;
+            text-decoration: none;
+            background: #9ca3af;
+            padding: 6px 18px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+
+        .home-link:hover {
+            background: #6b7280;
+        }
+
         .article-header {
-            padding: 48px 32px 32px;
+            padding: 24px 32px 32px;
             border-bottom: 1px solid var(--border);
         }
 
@@ -178,14 +210,14 @@
         }
 
         .ref-card h4 {
-            font-size: 14px;
+            font-size: 17px;
             font-weight: 600;
             margin-bottom: 8px;
             color: var(--accent);
         }
 
         .ref-card p {
-            font-size: 13px;
+            font-size: 15px;
             margin: 0;
             color: var(--muted);
         }
@@ -253,6 +285,7 @@
 </head>
 <body>
     <article class="article-container">
+        <a href="index.html" class="back-link">&larr; Go Back</a>
         <header class="article-header">
             <div class="category-label">Foundational Concepts</div>
             <h1>Contacts vs. Individuals</h1>
@@ -280,6 +313,8 @@
                     <p>Email, phone, birthday, event attendance, volunteer hours</p>
                 </div>
             </div>
+
+            <p>In Virtuous, the contact and individual are edited separately—each has its own edit button, and you can add new individuals to an existing contact. <a href="article-screenshots.html#contact-vs-individual" class="cross-ref">→ See: Screenshot — Editing Contacts vs. Individuals</a></p>
 
             <h2>Why It's Designed This Way</h2>
 
@@ -342,6 +377,11 @@
 
             <p>The order matters for mail merge and formal communications. Virtuous auto-generates these from individual names, so keep individual names in proper case (not ALL CAPS).</p>
 
+            <div class="callout">
+                <div class="callout-label">Important — Where to Make Name Changes</div>
+                <p>For <strong>Household</strong> contacts, always edit the <strong>individual</strong> record—not the contact record—when updating a person's name. Changing the name on the individual automatically updates all the name variations on the contact (Contact Name, Informal Name, Formal Name, etc.). Editing the contact record directly will not update the person's underlying record and can cause mismatches. <a href="article-screenshots.html#where-to-update" class="cross-ref">→ See: Screenshot — Where to Update Names</a></p>
+            </div>
+
             <h2>What About Organizations?</h2>
 
             <p>Organizations and Foundations work slightly differently. They still need at least one individual (usually a contact person), but:</p>
@@ -351,6 +391,17 @@
             • Employees are often placeholders linked to their household records</p>
 
             <p>The principle remains: <strong>don't duplicate people</strong>. If Sarah is the Executive Director of ABC Foundation and also a personal donor, her full profile lives in her household. ABC Foundation gets a placeholder.</p>
+
+            <h2>How Names Appear on Mail</h2>
+
+            <p>When generating mailings, thank-you letters, or other communications, Virtuous looks at the <strong>TMC Salutation</strong> field on the contact record first. If a value exists there (e.g., "Mr. and Mrs. Barker"), that is what will appear on the correspondence.</p>
+
+            <p>If the TMC Salutation field is blank, Virtuous falls back to the <strong>Contact Name</strong> (the standard addressee field). This means it's important to keep the TMC Salutation populated for any contact where you want a specific greeting or formal address.</p>
+
+            <div class="callout warning">
+                <div class="callout-label">Special Receipting Contacts</div>
+                <p>Contacts tagged with <strong>Special Receipting</strong> are manually processed with each mailing. These require individual attention because there are nuances—for example, a foundation and the associated individual may both need to receive thank-you notes, or the salutation may need to differ from the standard format. <a href="tmc-tags-reference.html" class="cross-ref">→ See: Tags Reference — Special Receipting</a></p>
+            </div>
 
             <div class="summary">
                 <h3>Key Takeaways</h3>
@@ -365,8 +416,8 @@
         </div>
 
         <footer class="article-footer">
-            TMC · Virtuous CRM Training<br>
-            Related: <span class="cross-ref">The Big Picture</span> · <span class="cross-ref">Campaigns and Projects</span>
+            The Mailbox Club · CRM Training<br>
+            <a href="index.html" class="home-link">Home</a>
         </footer>
     </article>
 </body>

@@ -27,14 +27,46 @@
         }
 
         .article-container {
-            max-width: 620px;
+            max-width: 860px;
             margin: 0 auto;
             background: var(--paper);
             box-shadow: 0 1px 3px rgba(0,0,0,0.08);
         }
 
+        .back-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            background: #2563eb;
+            text-decoration: none;
+            padding: 6px 16px;
+            border-radius: 4px;
+            margin: 16px 0 0 32px;
+        }
+
+        .back-link:hover {
+            background: #1d4ed8;
+        }
+
+        .home-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #fff;
+            text-decoration: none;
+            background: #9ca3af;
+            padding: 6px 18px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+
+        .home-link:hover {
+            background: #6b7280;
+        }
+
         .article-header {
-            padding: 48px 32px 32px;
+            padding: 24px 32px 32px;
             border-bottom: 1px solid var(--border);
         }
 
@@ -315,6 +347,7 @@
 </head>
 <body>
     <article class="article-container">
+        <a href="index.html" class="back-link">&larr; Go Back</a>
         <header class="article-header">
             <div class="category-label">Getting Hands-On</div>
             <h1>Your First Query</h1>
@@ -505,8 +538,8 @@
         </div>
 
         <footer class="article-footer">
-            TMC · Virtuous CRM Training<br>
-            Related: <span class="cross-ref">TMC Tags Reference</span> · <span class="cross-ref">The Big Picture</span>
+            The Mailbox Club · CRM Training<br>
+            <a href="index.html" class="home-link">Home</a>
         </footer>
     </article>
 </body>

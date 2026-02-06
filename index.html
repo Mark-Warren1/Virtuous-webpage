@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtuous Training Resources</title>
+    <title>TMC CRM Reference</title>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -31,7 +31,7 @@
         }
 
         .container {
-            max-width: 700px;
+            max-width: 860px;
             margin: 0 auto;
             background: var(--paper);
             box-shadow: 0 1px 3px rgba(0,0,0,0.08);
@@ -128,6 +128,46 @@
             margin-top: 8px;
         }
 
+        .history {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .history-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .history-entry {
+            margin-bottom: 12px;
+        }
+
+        .history-entry:last-child {
+            margin-bottom: 0;
+        }
+
+        .history-date {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .history-text {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .history-text a {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
         .footer {
             padding: 24px 32px;
             border-top: 1px solid var(--border);
@@ -140,7 +180,7 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1>Virtuous Training Resources</h1>
+            <h1>TMC CRM Reference</h1>
             <p class="subtitle">Guides and documentation for working with Virtuous CRM</p>
         </header>
 
@@ -179,12 +219,28 @@
                         <div class="card-description">A step-by-step guide to building your first query and extracting data from Virtuous.</div>
                         <div class="card-date">Updated 1/6/26</div>
                     </a>
+                    <a href="article-screenshots.html" class="card">
+                        <div class="card-title">Virtuous CRM Screenshots</div>
+                        <div class="card-description">Annotated screenshots explaining the Virtuous interface — editing contacts, individuals, and more.</div>
+                        <div class="card-date">Updated 2/6/26</div>
+                    </a>
+                </div>
+            </section>
+            <section class="history">
+                <h2 class="history-title">Update History</h2>
+                <div class="history-entry">
+                    <span class="history-date">February 6, 2026</span>
+                    <p class="history-text">Added new <a href="article-screenshots.html">Virtuous CRM Screenshots</a> page with annotated images showing how to edit contacts vs. individuals and where to update names. Added a section to Contacts vs. Individuals covering how the TMC Salutation field is used on mailings and how Special Receipting contacts are handled. Widened all pages for better use of desktop screens.</p>
+                </div>
+                <div class="history-entry">
+                    <span class="history-date">January 6, 2026</span>
+                    <p class="history-text">Initial launch with five core resources: The Big Picture overview, TMC Tags Reference, and articles on Contacts vs. Individuals, Campaigns and Projects, and Your First Query.</p>
                 </div>
             </section>
         </main>
 
         <footer class="footer">
-            Training resources for Virtuous CRM
+            The Mailbox Club · CRM Training
         </footer>
     </div>
 </body>

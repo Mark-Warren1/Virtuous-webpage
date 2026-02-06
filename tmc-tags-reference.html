@@ -50,9 +50,41 @@
         }
 
         .container {
-            max-width: 720px;
+            max-width: 860px;
             margin: 0 auto;
             padding: 48px 24px;
+        }
+
+        .back-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            background: #2563eb;
+            text-decoration: none;
+            padding: 6px 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .back-link:hover {
+            background: #1d4ed8;
+        }
+
+        .home-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #fff;
+            text-decoration: none;
+            background: #9ca3af;
+            padding: 6px 18px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+
+        .home-link:hover {
+            background: #6b7280;
         }
 
         /* Header */
@@ -346,6 +378,7 @@
 </head>
 <body>
     <div class="container">
+        <a href="index.html" class="back-link">&larr; Go Back</a>
         <header class="header">
             <div class="header-label">Quick Reference</div>
             <h1>TMC Tags Reference</h1>
@@ -650,7 +683,8 @@
         </section>
 
         <footer class="footer">
-            <p>Questions? Contact Mark for tag clarifications or to request new tags.</p>
+            <p>The Mailbox Club · CRM Training</p>
+            <a href="index.html" class="home-link">Home</a>
         </footer>
     </div>
 </body>
