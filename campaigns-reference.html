@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaigns &amp; Segment Codes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1a1a;
+            --paper: #fdfcfa;
+            --muted: #6b6b6b;
+            --border: #e0dcd4;
+            --diagram-bg: #f8f6f2;
+
+            --campaign-bg: #eef2ff;
+            --campaign-border: #6366f1;
+            --campaign-text: #4338ca;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        .back-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            background: #2563eb;
+            text-decoration: none;
+            padding: 6px 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .back-link:hover {
+            background: #1d4ed8;
+        }
+
+        .home-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #fff;
+            text-decoration: none;
+            background: #9ca3af;
+            padding: 6px 18px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+
+        .home-link:hover {
+            background: #6b7280;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--campaign-border);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            color: var(--ink);
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: var(--muted);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .updated {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 12px;
+        }
+
+        /* Section */
+        .tag-section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .section-icon.campaign { background: var(--campaign-bg); border: 1px solid var(--campaign-border); }
+
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .section-intro {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 20px;
+            padding-left: 52px;
+        }
+
+        /* Campaign blocks */
+        .tag-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .campaign-block {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .campaign-block:hover {
+            border-color: #ccc;
+        }
+
+        .campaign-name {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--ink);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .campaign-channels {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .channel-row {
+            display: grid;
+            grid-template-columns: 110px auto 1fr;
+            gap: 12px;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .channel-type {
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--campaign-text);
+            background: var(--campaign-bg);
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .segment-code {
+            font-family: 'SF Mono', 'Consolas', 'Courier New', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ink);
+            background: #f3f4f6;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        .channel-desc {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 26px; }
+            .container { padding: 32px 16px; }
+            .section-intro { padding-left: 0; margin-top: 12px; }
+            .channel-row { grid-template-columns: 1fr; gap: 4px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">&larr; Go Back</a>
+        <header class="header">
+            <div class="header-label">Quick Reference</div>
+            <h1>Campaigns & Segment Codes</h1>
+            <p class="subtitle">Active campaign tracking codes for Virtuous CRM</p>
+            <p class="updated">Last updated: February 2026</p>
+        </header>
+
+        <section class="tag-section">
+            <div class="section-header">
+                <div class="section-icon campaign">&#x1F4CA;</div>
+                <div>
+                    <h2 class="section-title">Active Campaigns</h2>
+                    <p class="section-subtitle">Current outreach campaigns and their segment codes</p>
+                </div>
+            </div>
+            <p class="section-intro">These are the active campaigns and their segment codes used to track different outreach channels in Virtuous.</p>
+
+            <div class="tag-grid">
+                <div class="campaign-block">
+                    <div class="campaign-name">Mali Street Kids</div>
+                    <div class="campaign-channels">
+                        <div class="channel-row">
+                            <span class="channel-type">Direct Mail</span>
+                            <code class="segment-code">MA0126DM1</code>
+                            <span class="channel-desc">February Newsletter</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="campaign-block">
+                    <div class="campaign-name">1040 Challenge</div>
+                    <div class="campaign-channels">
+                        <div class="channel-row">
+                            <span class="channel-type">Website</span>
+                            <code class="segment-code">CH0126WB1</code>
+                            <span class="channel-desc">Default</span>
+                        </div>
+                        <div class="channel-row">
+                            <span class="channel-type">Email</span>
+                            <code class="segment-code">UN0126EM1</code>
+                            <span class="channel-desc">For emails sent</span>
+                        </div>
+                        <div class="channel-row">
+                            <span class="channel-type">Peer-to-Peer</span>
+                            <code class="segment-code">CH0126P2P1</code>
+                            <span class="channel-desc">Drew</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="campaign-block">
+                    <div class="campaign-name">India Matching 400k</div>
+                    <div class="campaign-channels">
+                        <div class="channel-row">
+                            <span class="channel-type">Website</span>
+                            <code class="segment-code">IN1225WB1</code>
+                            <span class="channel-desc">Default</span>
+                        </div>
+                        <div class="channel-row">
+                            <span class="channel-type">Email</span>
+                            <code class="segment-code">IN1225EM1</code>
+                            <span class="channel-desc">For emails sent</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>The Mailbox Club · CRM Training</p>
+            <a href="index.html" class="home-link">Home</a>
+        </footer>
+    </div>
+</body>
+</html>
