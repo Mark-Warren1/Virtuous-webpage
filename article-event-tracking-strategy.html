@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tags, Fields &amp; Campaigns: When to Use What | Virtuous Training</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1f2937;
+            --paper: #ffffff;
+            --muted: #6b7280;
+            --accent: #0d9488;
+            --accent-light: #ccfbf1;
+            --border: #e5e7eb;
+            --tag-color: #dc2626;
+            --tag-light: #fee2e2;
+            --field-color: #7c3aed;
+            --field-light: #ede9fe;
+            --campaign-color: #0891b2;
+            --campaign-light: #cffafe;
+            --query-color: #2563eb;
+            --query-light: #dbeafe;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f9fafb;
+            color: var(--ink);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .article-container {
+            max-width: 860px;
+            margin: 0 auto;
+            background: var(--paper);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .back-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            background: #2563eb;
+            text-decoration: none;
+            padding: 6px 16px;
+            border-radius: 4px;
+            margin: 16px 0 0 32px;
+        }
+
+        .back-link:hover { background: #1d4ed8; }
+
+        .home-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #fff;
+            text-decoration: none;
+            background: #9ca3af;
+            padding: 6px 18px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+
+        .home-link:hover { background: #6b7280; }
+
+        .article-header {
+            padding: 24px 32px 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .category-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.25;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+
+        .article-meta { font-size: 14px; color: var(--muted); }
+
+        .article-content { padding: 32px; }
+
+        .lead {
+            font-size: 18px;
+            color: var(--muted);
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        h2 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            color: var(--ink);
+        }
+
+        h2:first-child { margin-top: 0; }
+
+        h3 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 28px;
+            margin-bottom: 12px;
+            color: var(--ink);
+        }
+
+        p { margin-bottom: 20px; }
+        strong { font-weight: 600; color: var(--ink); }
+        em { font-style: italic; }
+
+        /* ── Decision framework ── */
+        .decision-framework {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px 24px;
+            margin: 28px 0;
+        }
+
+        .decision-framework .fw-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .decision-question {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--ink);
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .decision-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+        }
+
+        .decision-option {
+            display: block;
+            text-decoration: none;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            cursor: pointer;
+        }
+
+        .decision-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .decision-option.opt-tag {
+            background: var(--tag-light);
+            border: 2px solid var(--tag-color);
+        }
+
+        .decision-option.opt-field {
+            background: var(--field-light);
+            border: 2px solid var(--field-color);
+        }
+
+        .decision-option.opt-campaign {
+            background: var(--campaign-light);
+            border: 2px solid var(--campaign-color);
+        }
+
+        .option-trigger {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .option-name {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 18px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .decision-option.opt-tag .option-name { color: var(--tag-color); }
+        .decision-option.opt-field .option-name { color: var(--field-color); }
+        .decision-option.opt-campaign .option-name { color: var(--campaign-color); }
+
+        .option-desc {
+            font-size: 14px;
+            color: var(--ink);
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .option-example {
+            font-size: 13px;
+            font-style: italic;
+            color: var(--muted);
+        }
+
+        .option-cta {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 6px 14px;
+            border-radius: 6px;
+            color: white;
+        }
+
+        .decision-option.opt-tag .option-cta { background: var(--tag-color); }
+        .decision-option.opt-field .option-cta { background: var(--field-color); }
+        .decision-option.opt-campaign .option-cta { background: var(--campaign-color); }
+
+        /* ── Method cards ── */
+        .method-card {
+            border-radius: 12px;
+            padding: 28px;
+            margin: 24px 0;
+        }
+
+        .method-card.tag-card {
+            background: var(--tag-light);
+            border: 2px solid var(--tag-color);
+        }
+
+        .method-card.field-card {
+            background: var(--field-light);
+            border: 2px solid var(--field-color);
+        }
+
+        .method-card.campaign-card {
+            background: var(--campaign-light);
+            border: 2px solid var(--campaign-color);
+        }
+
+        .method-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .method-card.tag-card .method-label { color: var(--tag-color); }
+        .method-card.field-card .method-label { color: var(--field-color); }
+        .method-card.campaign-card .method-label { color: var(--campaign-color); }
+
+        .method-title {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+
+        .method-one-liner {
+            font-size: 15px;
+            font-style: italic;
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+
+        .method-card p {
+            font-size: 15px;
+            color: var(--ink);
+            margin-bottom: 12px;
+        }
+
+        .method-card p:last-child { margin-bottom: 0; }
+
+        .method-examples {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .method-examples strong { font-size: 13px; }
+
+        /* ── Comparison tables ── */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin: 24px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .compare-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border);
+            background: #f8fafc;
+        }
+
+        .compare-table th.col-tag { color: var(--tag-color); }
+        .compare-table th.col-field { color: var(--field-color); }
+        .compare-table th.col-campaign { color: var(--campaign-color); }
+
+        .compare-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .compare-table td:first-child {
+            font-weight: 600;
+            color: var(--ink);
+            white-space: nowrap;
+        }
+
+        .compare-table tr:last-child td { border-bottom: none; }
+
+        .compare-table .yes { color: #16a34a; font-weight: 500; }
+        .compare-table .no { color: var(--tag-color); font-weight: 500; }
+        .compare-table .meh { color: var(--muted); }
+
+        /* ── Flow visual ── */
+        .flow-visual {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            margin: 28px 0;
+            text-align: center;
+        }
+
+        .flow-visual .diagram-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .flow-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .flow-row:last-child { margin-bottom: 0; }
+
+        .flow-box {
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .flow-box.tag { background: var(--tag-light); border: 2px solid var(--tag-color); color: var(--tag-color); }
+        .flow-box.field { background: var(--field-light); border: 2px solid var(--field-color); color: var(--field-color); }
+        .flow-box.query { background: var(--query-light); border: 2px solid var(--query-color); color: var(--query-color); }
+        .flow-box.campaign { background: var(--campaign-light); border: 2px solid var(--campaign-color); color: var(--campaign-color); }
+        .flow-box.neutral { background: white; border: 2px solid var(--border); color: var(--ink); }
+
+        .flow-arrow { font-size: 20px; color: var(--muted); }
+
+        /* ── Callouts ── */
+        .callout {
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            margin: 28px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .callout.green { background: var(--accent-light); border-color: var(--accent); }
+        .callout.amber { background: #fffbeb; border-color: #f59e0b; }
+        .callout.blue { background: var(--query-light); border-color: var(--query-color); }
+
+        .callout-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .callout.green .callout-label { color: var(--accent); }
+        .callout.amber .callout-label { color: #b45309; }
+        .callout.blue .callout-label { color: var(--query-color); }
+
+        .callout p { margin: 0; font-size: 15px; }
+        .callout p + p { margin-top: 12px; }
+
+        /* ── Query walkthrough ── */
+        .query-steps {
+            background: white;
+            border: 2px solid var(--query-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 24px 0;
+        }
+
+        .query-steps-header {
+            background: var(--query-light);
+            padding: 14px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--query-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .query-step {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 32px 1fr;
+            gap: 12px;
+            align-items: start;
+        }
+
+        .query-step:last-child { border-bottom: none; }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--query-color);
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-content { font-size: 14px; }
+        .step-content strong { color: var(--ink); }
+        .step-content .step-detail { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+        .code-inline {
+            font-family: 'SF Mono', 'Consolas', 'Courier New', monospace;
+            font-size: 13px;
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: var(--ink);
+        }
+
+        /* ── Screenshots ── */
+        .screenshot-wrapper {
+            margin: 20px 0;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f8fafc;
+        }
+
+        .screenshot-wrapper img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .screenshot-wrapper.wide-img {
+            overflow-x: auto;
+        }
+
+        .screenshot-wrapper.wide-img img {
+            min-width: 900px;
+        }
+
+        .screenshot-caption {
+            font-size: 12px;
+            color: var(--muted);
+            padding: 10px 16px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        /* ── Cross-ref link ── */
+        .cross-ref {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .cross-ref:hover { background: #99f6e4; }
+
+        /* ── Summary ── */
+        .summary {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 10px;
+            padding: 24px;
+            margin: 36px 0 0;
+        }
+
+        .summary h3 {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #166534;
+            margin-bottom: 12px;
+        }
+
+        .summary ul { margin: 0; padding-left: 20px; }
+        .summary li { font-size: 14px; margin-bottom: 8px; color: var(--ink); }
+        .summary li:last-child { margin-bottom: 0; }
+
+        /* ── Footer ── */
+        .article-footer {
+            padding: 24px 32px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            h1 { font-size: 26px; }
+            .article-header, .article-content, .article-footer { padding-left: 20px; padding-right: 20px; }
+            .decision-options { grid-template-columns: 1fr; }
+            .compare-table { font-size: 12px; }
+            .compare-table th, .compare-table td { padding: 8px 10px; }
+        }
+    </style>
+</head>
+<body>
+    <article class="article-container">
+        <a href="index.html" class="back-link">&larr; Go Back</a>
+        <header class="article-header">
+            <div class="category-label">Strategy</div>
+            <h1>Tags, Fields &amp; Campaigns: When to Use What</h1>
+            <p class="article-meta">7 min read · How we keep our database clean and useful</p>
+        </header>
+
+        <div class="article-content">
+            <p class="lead">Virtuous gives us three tools for organizing contacts: Tags, Custom Fields, and Campaigns. They each do different things. Using the wrong one is how databases turn into junk drawers. This guide helps you pick the right tool every time.</p>
+
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- SECTION 1: THE DECISION FRAMEWORK          -->
+            <!-- ═══════════════════════════════════════════ -->
+
+            <h2>Which Tool Do I Use?</h2>
+
+            <p>Every time you need to record something about a contact, start with one question: <strong>what kind of information is this?</strong> The answer points you to the right tool. Each of these three options serves a different purpose, and they don't overlap much. Pick the wrong one and you'll either clutter up the system or miss out on reporting you could have had.</p>
+
+            <div class="decision-framework">
+                <div class="fw-label">The decision framework</div>
+                <div class="decision-question">What am I trying to record about this contact?</div>
+                <div class="decision-options">
+                    <a href="#tags" class="decision-option opt-tag">
+                        <div class="option-trigger">A current status or preference</div>
+                        <span class="option-name">Tag</span>
+                        <div class="option-desc">Something that is true about them <strong>right now</strong> and affects how we communicate with them.</div>
+                        <div class="option-example">"They don't want mail." "They're a business owner."</div>
+                        <span class="option-cta">Learn more &darr;</span>
+                    </a>
+                    <a href="#custom-fields" class="decision-option opt-field">
+                        <div class="option-trigger">A past event or history</div>
+                        <span class="option-name">Custom Field</span>
+                        <div class="option-desc">Something that <strong>happened</strong> and you want a permanent record, but you don't need to track giving from it.</div>
+                        <div class="option-example">"They attended the OKC Conference." "They went on a mission trip."</div>
+                        <span class="option-cta">Learn more &darr;</span>
+                    </a>
+                    <a href="#campaigns" class="decision-option opt-campaign">
+                        <div class="option-trigger">Planned outreach we sent</div>
+                        <span class="option-name">Campaign</span>
+                        <div class="option-desc">An effort we organized and want to measure. Did it work? <strong>Did it generate giving?</strong></div>
+                        <div class="option-example">"We mailed them the Easter appeal." "They were part of the 1040 Challenge."</div>
+                        <span class="option-cta">Learn more &darr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <p>If you're still not sure, a good rule of thumb: <strong>if it has a year in the name, it's probably not a tag.</strong> "Gala 2024" is history (Custom Field) or an outreach effort (Campaign). "No direct mail" is a current status (Tag).</p>
+
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- ALL THREE AT A GLANCE                      -->
+            <!-- ═══════════════════════════════════════════ -->
+
+            <h2>All Three at a Glance</h2>
+
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="col-tag">Tag</th>
+                        <th class="col-field">Custom Field</th>
+                        <th class="col-campaign">Campaign</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Best for</td>
+                        <td>Current status</td>
+                        <td>Past events &amp; history</td>
+                        <td>Planned outreach &amp; ROI</td>
+                    </tr>
+                    <tr>
+                        <td>Answers</td>
+                        <td>"What is true about them?"</td>
+                        <td>"What did they do?"</td>
+                        <td>"What did we send, and did it work?"</td>
+                    </tr>
+                    <tr>
+                        <td>Where it lives</td>
+                        <td>Every dropdown &amp; filter</td>
+                        <td>Engagement History only</td>
+                        <td>Campaigns tab only</td>
+                    </tr>
+                    <tr>
+                        <td>Financial tracking</td>
+                        <td class="no">No</td>
+                        <td class="no">No</td>
+                        <td class="yes">Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Dynamic grouping</td>
+                        <td class="no">No (manual)</td>
+                        <td class="yes">Yes (via query)</td>
+                        <td class="yes">Yes (via query)</td>
+                    </tr>
+                    <tr>
+                        <td>Permanent record</td>
+                        <td class="meh">Often deleted to reduce clutter</td>
+                        <td class="yes">Always</td>
+                        <td class="yes">Always</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Now let's look at each one in detail.</p>
+
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- SECTION 2: TAGS                            -->
+            <!-- ═══════════════════════════════════════════ -->
+
+            <h2 id="tags">1. Tags: Current Status, Not History</h2>
+
+            <div class="method-card tag-card">
+                <div class="method-label">Use when</div>
+                <div class="method-title">Something is true about this contact right now</div>
+                <div class="method-one-liner">Tags describe what a contact is, not what they did.</div>
+                <p>Tags work best for <strong>ongoing states</strong> that affect how we talk to someone. Think of them like labels on a folder. They tell you how to handle this contact <em>today</em>.</p>
+                <p>A good tag is timeless. "No direct mail" is just as true next year as it is today. "Capacity 1M-3M" stays relevant until the research changes. You'd never need to delete these to clean things up.</p>
+                <div class="method-examples">
+                    <strong>Our tags:</strong> Communication preferences (No direct mail, No email, No appeals, Do not call), Receipting preferences, Capacity &amp; Wealth indicators, System tags (Prelapsed, Lapsed). <a href="tags-reference.html" class="cross-ref">&rarr; Full list</a>
+                </div>
+            </div>
+
+            <h3>Why We Don't Use Tags for Events</h3>
+
+            <p>Here's the thing: <strong>tags show up in every dropdown, every filter, on every screen.</strong> If you create a tag for every event, five years from now you'll be scrolling through "Gala 2021," "Coffee Meetup 2022," "Fall Banquet 2023," and a dozen more dead entries just to find "No direct mail."</p>
+
+            <p>That's exactly what happened before. The tag list got so long that the useful tags were buried in noise. Cleaning it up meant deleting old tags, which meant losing the historical record. Nobody won.</p>
+
+            <p>So now we keep the tag list short and focused. Every tag in the list is something you'd actually use on a regular basis. Past events go somewhere else.</p>
+
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- SECTION 3: CUSTOM FIELDS                   -->
+            <!-- ═══════════════════════════════════════════ -->
+
+            <h2 id="custom-fields">2. Custom Fields: History and One-Off Events</h2>
+
+            <div class="method-card field-card">
+                <div class="method-label">Use when</div>
+                <div class="method-title">Something happened and you want a permanent record</div>
+                <div class="method-one-liner">Custom fields record what a contact did, not what they are.</div>
+                <p>For past events, conferences, donor lunches, mission trips, or anything where you want to remember "this person was part of that" but don't need to track giving tied to it, use the <strong>Event Participation History</strong> multi-select field.</p>
+                <p>This field lives in the <strong>Engagement History</strong> group on the contact record. It's permanent, searchable, and completely out of the way. You can query on it anytime, but it won't show up in your tag dropdowns.</p>
+                <div class="method-examples">
+                    <strong>Good fits:</strong> Conference attendance, donor lunches, mission trips, meetups. Anything where you want the history but don't need a full campaign with financial tracking.
+                </div>
+            </div>
+
+            <div class="screenshot-wrapper">
+                <img src="assets/2-Engagement-History-group.png" alt="Virtuous contact record showing the Engagement History group with Event Participation History field. The value '2026 OKC Conference (Green Family)' is selected.">
+                <div class="screenshot-caption">The Event Participation History field on a contact record</div>
+            </div>
+
+            <p>The big advantage here: the record is <strong>permanent</strong>. With tags, people eventually delete old event tags to keep things clean, and the history is gone. With a custom field, the data stays on the contact forever and doesn't clutter anything else.</p>
+
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- SECTION 4: CAMPAIGNS                       -->
+            <!-- ═══════════════════════════════════════════ -->
+
+            <h2 id="campaigns">3. Campaigns: Planned Outreach with Financial Tracking</h2>
+
+            <div class="method-card campaign-card">
+                <div class="method-label">Use when</div>
+                <div class="method-title">You sent something and need to track giving from it</div>
+                <div class="method-one-liner">Campaigns answer: "Did this effort generate donations?"</div>
+                <p>When you're doing planned outreach (a direct mail appeal, an email campaign, a giving challenge) and want to measure the financial return, that's a Campaign. Campaigns connect <strong>who you reached</strong> to <strong>what they gave</strong>.</p>
+                <p>This is the structure we're moving into for all planned outreach. It uses <strong>Queries</strong> in Virtuous to enroll members, so it's built for organized sends and segmented audiences, not one-off invites. <a href="campaigns-reference.html" class="cross-ref">&rarr; Active Campaigns</a></p>
+            </div>
+
+            <h3>Why Campaigns Beat Tags for Outreach Tracking</h3>
+
+            <p>Say you hosted a conference and want to know: did attending lead anyone to give? Here's what each tool gives you:</p>
+
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="col-tag">Using a Tag</th>
+                        <th class="col-campaign">Using a Campaign</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Historical Record</td>
+                        <td class="meh">Yes, but it clutters the tag list forever</td>
+                        <td class="yes">Yes, lives in the Campaigns tab. Out of the way.</td>
+                    </tr>
+                    <tr>
+                        <td>Reporting</td>
+                        <td class="meh">You can see who was there</td>
+                        <td class="yes">Who was there AND if they gave because of it</td>
+                    </tr>
+                    <tr>
+                        <td>ROI Tracking</td>
+                        <td class="no">No</td>
+                        <td class="yes">Yes. Total cost vs. total gifts from attendees.</td>
+                    </tr>
+                    <tr>
+                        <td>Ease of Filtering</td>
+                        <td>Simple tag filter</td>
+                        <td>Just as simple using the "Campaign Membership" filter</td>
+                    </tr>
+                    <tr>
+                        <td>Enrollment</td>
+                        <td>Manual. Add/remove contacts one by one.</td>
+                        <td>Automated via Saved Queries + Run Segmentation</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>The Campaign Workflow</h3>
+
+            <p>Campaigns need a few connected pieces. Here's how they fit together:</p>
+
+            <div class="flow-visual">
+                <div class="diagram-label">Campaign workflow</div>
+                <div class="flow-row">
+                    <div class="flow-box field">Custom Field or Contact Data</div>
+                    <span class="flow-arrow">&rarr;</span>
+                    <div class="flow-box query">Saved Query</div>
+                    <span class="flow-arrow">&rarr;</span>
+                    <div class="flow-box campaign">Campaign Segment</div>
+                </div>
+                <div class="flow-row" style="margin-top: 16px;">
+                    <div class="flow-box neutral" style="font-size: 13px;">Then: Actions &rarr; Run Segmentation</div>
+                </div>
+            </div>
+
+            <div class="callout amber">
+                <div class="callout-label">Critical step. Don't skip this.</div>
+                <p>After linking a query to a Campaign Segment, you <strong>must</strong> click <strong>Actions &gt; Run Segmentation</strong>. Until you do, the segment may show Total Gifts (money received with that code) but <strong>0 Total Contacts</strong>. Running segmentation enrolls the people from your query so reporting actually works.</p>
+            </div>
+
+            <div class="screenshot-wrapper">
+                <img src="assets/3-Campaign-Communication-page.png" alt="Virtuous Campaign Communication page showing the Actions dropdown with Run Segmentation option. The table shows Total Giving of $53,144.85 and 64 Total Gifts.">
+                <div class="screenshot-caption">The Actions dropdown on a Campaign Communication page. Click "Run Segmentation" to enroll contacts.</div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- SECTION 5: PRACTICAL EXAMPLES              -->
+            <!-- ═══════════════════════════════════════════ -->
+
+            <h2>Putting It Into Practice</h2>
+
+            <p>Now that you know <em>which</em> tool to use, here's <em>how</em> to use each one with real examples from our system.</p>
+
+            <!-- Example 1: Querying tags (complex) -->
+            <h3>Example: Building a Mailing List That Respects Preferences</h3>
+
+            <p>We're sending the <strong>2026 Easter direct mail appeal</strong> (segment code <span class="code-inline">EA0326DM1</span>). We need everyone eligible to get it, but we have to respect the communication preferences people have set. This is where tags do their job.</p>
+
+            <div class="query-steps">
+                <div class="query-steps-header">Query: Easter 2026 Mailable Donors</div>
+                <div class="query-step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <strong>Start with your base audience</strong>
+                        <div class="step-detail">Contact Query &rarr; add your starting criteria (e.g., gave in last 24 months, or a specific group)</div>
+                    </div>
+                </div>
+                <div class="query-step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <strong>Exclude "No direct mail"</strong>
+                        <div class="step-detail">Tag &rarr; Does Not Include &rarr; <span class="code-inline">No direct mail</span><br>These contacts want zero physical mail of any kind.</div>
+                    </div>
+                </div>
+                <div class="query-step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <strong>Exclude "No appeals"</strong>
+                        <div class="step-detail">Tag &rarr; Does Not Include &rarr; <span class="code-inline">No appeals</span><br>These contacts are fine with informational mail but have opted out of fundraising asks.</div>
+                    </div>
+                </div>
+                <div class="query-step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <strong>Exclude "RTS" (Return to Sender)</strong>
+                        <div class="step-detail">Tag &rarr; Does Not Include &rarr; <span class="code-inline">RTS (Return to Sender)</span><br>No point mailing to a bad address. Verify these separately.</div>
+                    </div>
+                </div>
+                <div class="query-step">
+                    <div class="step-num">5</div>
+                    <div class="step-content">
+                        <strong>Save the query and link to Campaign Segment</strong>
+                        <div class="step-detail">Save as "Easter 2026 - Mailable Donors." Link it to the 2026 Easter campaign, segment <span class="code-inline">EA0326DM1</span>. Then click <strong>Actions &gt; Run Segmentation.</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="screenshot-wrapper">
+                <img src="assets/4-replacement.png" alt="Virtuous query builder with Field set to Tag, Operator set to 'Is none of', and Values showing No Direct Mail, No appeals, and RTS-Address Unknown / No Forward / Not Deliverable.">
+                <div class="screenshot-caption">Tag exclusion filter: "Is none of" removes contacts with these communication preferences from the list.</div>
+            </div>
+
+            <p>This is where tags shine. They're <strong>actionable filters</strong> you use every time you build an audience. "No direct mail" isn't trivia. It decides who gets mail today.</p>
+
+            <!-- Example 2: Custom field query -->
+            <h3>Example: Querying Event Participation History</h3>
+
+            <p>We want to follow up with everyone who attended the 2026 OKC Conference. We don't need a campaign for this. We just want the list.</p>
+
+            <div class="query-steps">
+                <div class="query-steps-header">Query: OKC Conference Attendees</div>
+                <div class="query-step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <strong>Create a Contact Query</strong>
+                        <div class="step-detail">Go to Contacts &rarr; Queries &rarr; New Query</div>
+                    </div>
+                </div>
+                <div class="query-step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <strong>Filter on the custom field</strong>
+                        <div class="step-detail">Custom Field &rarr; Event Participation History &rarr; Includes &rarr; <span class="code-inline">2026 OKC Conference (Green Family)</span></div>
+                    </div>
+                </div>
+                <div class="query-step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <strong>Save it</strong>
+                        <div class="step-detail">This query now works like a dynamic list. Any time you add this value to another contact, they automatically show up here. No manual upkeep.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="screenshot-wrapper">
+                <img src="assets/5-replacement.png" alt="Virtuous query builder with Field set to Event Participation History, Operator set to 'Is any of', and Value showing 2026 OKC Conference (Green Family).">
+                <div class="screenshot-caption">Filtering on Event Participation History. This acts like a dynamic tag for anyone with this value.</div>
+            </div>
+
+            <p>This does the same thing as tagging someone "OKC Conference 2026," but it doesn't pollute your tag list. And the record is permanent because there's no reason to ever delete it.</p>
+
+            <!-- Example 3: Campaign segmentation -->
+            <h3>Example: Full Campaign Setup (Book Boom)</h3>
+
+            <p>The <strong>2026 Book Boom</strong> was a relationship-building effort where we mailed books to about 200 people. We want to know if it moved the needle on giving. That means we need all three pieces working together.</p>
+
+            <div class="query-steps">
+                <div class="query-steps-header">Campaign Setup: 2026 Book Boom</div>
+                <div class="query-step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <strong>Record the history</strong>
+                        <div class="step-detail">Add "2026 Book Boom" to the Event Participation History field on each contact who received a book.</div>
+                    </div>
+                </div>
+                <div class="query-step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <strong>Build the query</strong>
+                        <div class="step-detail">Contact Query &rarr; Event Participation History Includes <span class="code-inline">2026 Book Boom</span></div>
+                    </div>
+                </div>
+                <div class="query-step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <strong>Link to Campaign Segment</strong>
+                        <div class="step-detail">On the 2026 Book Boom campaign, link this query to the <span class="code-inline">BO0226DM1</span> segment.</div>
+                    </div>
+                </div>
+                <div class="query-step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <strong>Run Segmentation</strong>
+                        <div class="step-detail">Actions &gt; Run Segmentation. Now you can see total gifts from book recipients and measure ROI.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-visual">
+                <div class="diagram-label">What you end up with</div>
+                <div class="flow-row">
+                    <div class="flow-box neutral">200 contacts</div>
+                    <span class="flow-arrow">&rarr;</span>
+                    <div class="flow-box campaign">$X in gifts</div>
+                    <span class="flow-arrow">=</span>
+                    <div class="flow-box neutral" style="font-weight: 700;">ROI</div>
+                </div>
+            </div>
+
+            <p>Without the campaign layer, you'd know who got a book (from the custom field) but have no idea if it led to giving. That's the difference.</p>
+
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- KEY TAKEAWAYS                              -->
+            <!-- ═══════════════════════════════════════════ -->
+
+            <div class="summary">
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li><strong>Tags</strong> = current status that affects how we communicate. Keep the list clean. If it's not timeless, it's not a tag.</li>
+                    <li><strong>Custom Fields</strong> (Event Participation History) = permanent history. Use for events and participation where giving doesn't need to be tracked directly.</li>
+                    <li><strong>Campaigns</strong> = planned outreach with financial tracking. Use when you need to know: did this effort generate donations?</li>
+                    <li><strong>Queries</strong> are the glue. They turn field values and tags into dynamic, self-updating lists.</li>
+                    <li>When using Campaigns, <strong>always Run Segmentation</strong> to connect contacts to financial data.</li>
+                    <li>Rule of thumb: if it has a year in the name, it's probably a Custom Field, not a tag.</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer class="article-footer">
+            The Mailbox Club &middot; CRM Training<br>
+            <a href="index.html" class="home-link">Home</a>
+        </footer>
+    </article>
+</body>
+</html>
