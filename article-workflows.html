@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <title>What Your Tasks Mean | Virtuous Training</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1f2937;
+            --paper: #ffffff;
+            --muted: #6b7280;
+            --accent: #4f46e5;
+            --border: #e5e7eb;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f9fafb;
+            color: var(--ink);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .article-container {
+            max-width: 860px;
+            margin: 0 auto;
+            background: var(--paper);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .back-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            background: #2563eb;
+            text-decoration: none;
+            padding: 6px 16px;
+            border-radius: 4px;
+            margin: 16px 0 0 32px;
+        }
+
+        .back-link:hover { background: #1d4ed8; }
+
+        .home-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #fff;
+            text-decoration: none;
+            background: #9ca3af;
+            padding: 6px 18px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+
+        .home-link:hover { background: #6b7280; }
+
+        .article-header {
+            padding: 24px 32px 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .category-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.25;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+
+        .article-meta { font-size: 14px; color: var(--muted); }
+
+        .article-content { padding: 32px; }
+
+        .lead {
+            font-size: 18px;
+            color: var(--muted);
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        h2 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 44px;
+            margin-bottom: 14px;
+            color: var(--ink);
+        }
+
+        h2:first-child { margin-top: 0; }
+
+        h3 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--ink);
+        }
+
+        p { margin-bottom: 20px; }
+        strong { font-weight: 600; color: var(--ink); }
+        em { font-style: italic; }
+
+        .article-content ul { margin: 0 0 20px; padding-left: 22px; }
+        .article-content li { margin-bottom: 8px; }
+
+        .code-inline {
+            font-family: 'SF Mono', 'Consolas', 'Courier New', monospace;
+            font-size: 13px;
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: var(--ink);
+        }
+
+        .inline-link {
+            color: var(--accent);
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        .inline-link:hover { color: #4338ca; }
+
+        /* ── Task types: clean typographic list, no boxes ── */
+        .task-list { margin: 22px 0 8px; }
+
+        .task { padding: 24px 0; }
+        .task:first-child { padding-top: 6px; }
+        .task:last-child { padding-bottom: 4px; }
+        .task + .task { border-top: 1px solid var(--border); }
+
+        .task h3 { margin-bottom: 6px; }
+
+        .task .one-liner {
+            color: var(--muted);
+            margin-bottom: 0;
+        }
+
+        .task p { margin: 12px 0 0; }
+
+        .facts {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            gap: 9px 22px;
+            margin-top: 16px;
+        }
+
+        .facts dt {
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .facts dd {
+            margin: 0;
+            font-size: 15px;
+            color: var(--ink);
+        }
+
+        .facts .quote { font-style: italic; }
+
+        /* ── Tables ── */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .compare-table th {
+            text-align: left;
+            padding: 12px 14px;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border);
+            background: #f8fafc;
+            color: #475569;
+        }
+
+        .compare-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .compare-table td:first-child {
+            font-weight: 600;
+            color: var(--ink);
+            white-space: nowrap;
+        }
+
+        .compare-table th:not(:first-child),
+        .compare-table td:not(:first-child) { text-align: center; }
+
+        .compare-table tr:last-child td { border-bottom: none; }
+
+        .compare-table .yes { color: #16a34a; font-weight: 700; }
+        .compare-table .meh { color: #cbd5e1; }
+
+        .note { font-size: 13px; color: var(--muted); margin-top: 10px; }
+
+        /* ── Summary (neutral recap) ── */
+        .summary {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 22px 24px;
+            margin: 40px 0 0;
+        }
+
+        .summary h3 {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .summary ul { margin: 0; padding-left: 20px; }
+        .summary li { font-size: 14px; margin-bottom: 8px; color: var(--ink); }
+        .summary li:last-child { margin-bottom: 0; }
+
+        /* ── Screenshot ── */
+        .screenshot-wrapper {
+            margin: 20px 0;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f8fafc;
+        }
+
+        .screenshot-wrapper img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .screenshot-caption {
+            font-size: 12px;
+            color: var(--muted);
+            padding: 10px 16px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        /* ── Footer ── */
+        .article-footer {
+            padding: 24px 32px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            h1 { font-size: 26px; }
+            .article-header, .article-content, .article-footer { padding-left: 20px; padding-right: 20px; }
+            .compare-table { font-size: 12px; }
+            .compare-table th, .compare-table td { padding: 8px 8px; }
+            .facts { grid-template-columns: 1fr; gap: 2px 0; }
+            .facts dt { margin-top: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <article class="article-container">
+        <a href="index.html" class="back-link">&larr; Go Back</a>
+        <header class="article-header">
+            <div class="category-label">For Case-Load Workers</div>
+            <h1>What Your Tasks Mean</h1>
+            <p class="article-meta">4 min read &middot; What your dashboard tasks mean and where they come from</p>
+        </header>
+
+        <div class="article-content">
+            <p class="lead">Every task in your dashboard's <strong>TASKS</strong> panel is created automatically; you don't add them by hand. This page explains the task types you'll see, what triggers each one, and where to find them. The short version: almost every task is about a partner on your case load, someone you're personally building a relationship with.</p>
+
+            <h2>Where Your Tasks Show Up</h2>
+
+            <p>Your assigned tasks appear in the <strong>TASKS</strong> panel on your Virtuous dashboard. The orange number badge shows how many are waiting. Each task is a single row:</p>
+
+            <div class="screenshot-wrapper">
+                <img src="assets/DashBoardTasksRedacted.png" alt="The TASKS panel on the Virtuous dashboard showing three Thank You tasks. Each row has a due date, the word General, a redacted partner name, and the workflow name 'Mark Thank You', followed by a 'Created on ... by Virtuous CRM' line.">
+                <div class="screenshot-caption">The TASKS panel on the dashboard. Partner names are redacted here for privacy; on your screen the partner's name appears where the black bars are.</div>
+            </div>
+
+            <p>Reading a task row, top to bottom:</p>
+
+            <ul>
+                <li>The <strong>task type</strong> in bold at the top (here, &ldquo;Thank You&rdquo;).</li>
+                <li>The <strong>due date</strong>, when to act by.</li>
+                <li><strong>General</strong>, the task category.</li>
+                <li>The <strong>partner</strong> the task is about (redacted above).</li>
+                <li>The <strong>workflow name</strong> that created it, such as <span class="code-inline">Mark Thank You</span>. This tells you exactly which workflow fired.</li>
+                <li>A <strong>&ldquo;Created on &hellip; by Virtuous CRM&rdquo;</strong> line. Your tasks are generated by the system, usually overnight.</li>
+            </ul>
+
+            <h2>The Task Types</h2>
+
+            <p>There are four task types. For each one, here is what sets it off, the exact wording you'll see, and which list it draws from.</p>
+
+            <div class="task-list">
+
+                <div class="task">
+                    <h3>Birthday</h3>
+                    <p class="one-liner">A heads-up that a partner's birthday is coming up. Your cue to send a card or a note.</p>
+                    <dl class="facts">
+                        <dt>Triggers when</dt>
+                        <dd>An individual on your list has an upcoming birthday.</dd>
+                        <dt>You'll see</dt>
+                        <dd class="quote">&ldquo;This person's birthday is upcoming&rdquo;</dd>
+                        <dt>Pulls from</dt>
+                        <dd>Individuals in your organization group list.</dd>
+                    </dl>
+                </div>
+
+                <div class="task">
+                    <h3>Thank You</h3>
+                    <p class="one-liner">Someone on your case load just gave. Reach out and thank them.</p>
+                    <p>This is the important one for non-financial staff: you don't see giving data directly, so the Thank You task is how you learn that a partner has donated.</p>
+                    <dl class="facts">
+                        <dt>Triggers when</dt>
+                        <dd>A contact in your group makes a recent donation.</dd>
+                        <dt>You'll see</dt>
+                        <dd class="quote">&ldquo;thank a donor from your group for a recent donation&rdquo;</dd>
+                        <dt>Pulls from</dt>
+                        <dd>Contacts in your organization group list.</dd>
+                    </dl>
+                </div>
+
+                <div class="task">
+                    <h3>Prelapse Donor Alert</h3>
+                    <p class="one-liner">A partner is slipping away. An early warning so you can re-engage before they fully lapse.</p>
+                    <dl class="facts">
+                        <dt>Triggers when</dt>
+                        <dd>A contact has not given in 6 months and is tagged Prelapsed. <a href="tags-reference.html" class="inline-link">See the Prelapsed tag</a>.</dd>
+                        <dt>You'll see</dt>
+                        <dd class="quote">&ldquo;This contact has not given within 6 months and tagged at &lsquo;prelapsed&rsquo;&rdquo;</dd>
+                        <dt>Pulls from</dt>
+                        <dd>Contacts in your organization group list.</dd>
+                    </dl>
+                </div>
+
+                <div class="task">
+                    <h3>Immediate Recurring Missed</h3>
+                    <p class="one-liner">A partner's expected recurring gift didn't come through. The task appears as soon as a payment is missed, so you can follow up right away.</p>
+                    <dl class="facts">
+                        <dt>Triggers when</dt>
+                        <dd>A tracked recurring gift on your case load becomes past due.</dd>
+                        <dt>Pulls from</dt>
+                        <dd>Case-load donors with tracked recurring gifts.</dd>
+                    </dl>
+                </div>
+
+            </div>
+
+            <h2>Where These Lists Come From</h2>
+
+            <p>Every task type above pulls from a <strong>Virtuous organization group list</strong>, which is your case load. That means every task you get is about a partner you're personally developing a relationship with.</p>
+
+            <p>There are two exceptions, both named <strong>No Case Load Overseer - Prelapse Donor Alert</strong> (one routed to John-Mark, one to Shelly). These don't come from a case-load list. They are org-wide safety nets that catch prelapsing donors who have no overseer assigned at all, around a thousand contacts each, so nobody slips through the cracks.</p>
+
+            <h2>Users &amp; Their Workflows</h2>
+
+            <p>Which task types each case-load worker currently has set up:</p>
+
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Person</th>
+                        <th>Birthday</th>
+                        <th>Thank You</th>
+                        <th>Prelapse</th>
+                        <th>No-Caseload Prelapse</th>
+                        <th>Recurring Missed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Carrie</td><td class="yes">&#10003;</td><td></td><td></td><td></td><td class="yes">&#10003;</td></tr>
+                    <tr><td>Charis</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td></td><td></td><td class="yes">&#10003;</td></tr>
+                    <tr><td>David (Genn)</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td></td><td class="yes">&#10003;</td></tr>
+                    <tr><td>Francois (FB)</td><td class="yes">&#10003;</td><td></td><td></td><td></td><td class="yes">&#10003;</td></tr>
+                    <tr><td>John-Mark (JME)</td><td class="yes">&#10003;</td><td></td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+                    <tr><td>Larry</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td></td><td class="yes">&#10003;</td></tr>
+                    <tr><td>Mark</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td></td><td></td><td class="yes">&#10003;</td></tr>
+                    <tr><td>Shelly</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+                </tbody>
+            </table>
+
+            <p class="note">Immediate Recurring Missed applies to every case load with tracked recurring donors.</p>
+
+            <div class="summary">
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li>Every task in your <strong>TASKS</strong> panel is created automatically, and it's about a partner on your case load.</li>
+                    <li><strong>Birthday</strong>: an upcoming birthday for someone on your list.</li>
+                    <li><strong>Thank You</strong>: your signal that a partner just gave. Reach out and thank them.</li>
+                    <li><strong>Prelapse Donor Alert</strong>: a partner tagged Prelapsed hasn't given in 6 months. Re-engage them.</li>
+                    <li><strong>Immediate Recurring Missed</strong>: a partner's expected recurring gift was missed.</li>
+                    <li>The only tasks not tied to your case load are the two No Case Load Overseer catch-alls (John-Mark and Shelly).</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer class="article-footer">
+            <img src="assets/tmc-logo.png" alt="The Mailbox Club" style="width: 100px; height: auto; margin-bottom: 8px;"><br>
+            CRM Training<br>
+            <a href="index.html" class="home-link">Home</a>
+        </footer>
+    </article>
+</body>
+</html>
