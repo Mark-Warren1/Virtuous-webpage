@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <title>Case Loads &amp; Your Notifications</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1a1a;
+            --paper: #fdfcfa;
+            --muted: #6b6b6b;
+            --border: #e0dcd4;
+
+            --accent-bg: #eef2ff;
+            --accent-border: #6366f1;
+            --accent-text: #4338ca;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        .back-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            background: #2563eb;
+            text-decoration: none;
+            padding: 6px 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .back-link:hover {
+            background: #1d4ed8;
+        }
+
+        .home-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #fff;
+            text-decoration: none;
+            background: #9ca3af;
+            padding: 6px 18px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+
+        .home-link:hover {
+            background: #6b7280;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-border);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            color: var(--ink);
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: var(--muted);
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        .updated {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 12px;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            background: var(--accent-bg);
+            border: 1px solid var(--accent-border);
+        }
+
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .section p {
+            margin-bottom: 14px;
+        }
+
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .inline-link {
+            color: var(--accent-text);
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        .term {
+            font-weight: 600;
+        }
+
+        /* At a glance table */
+        .glance {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .glance th {
+            text-align: left;
+            padding: 11px 14px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--muted);
+            background: #f8f6f2;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .glance td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .glance tr:last-child td {
+            border-bottom: none;
+        }
+
+        .glance td:first-child {
+            font-weight: 600;
+        }
+
+        .glance .due {
+            white-space: nowrap;
+        }
+
+        .glance a {
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .glance a:hover {
+            color: var(--accent-text);
+            text-decoration: underline;
+        }
+
+        /* Notification entries */
+        .entry {
+            padding: 28px 0;
+        }
+
+        .entry + .entry {
+            border-top: 1px solid var(--border);
+        }
+
+        .entry:first-child {
+            padding-top: 8px;
+        }
+
+        .entry:last-child {
+            padding-bottom: 0;
+        }
+
+        .entry h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+
+        .entry .one-liner {
+            color: var(--muted);
+            margin-bottom: 0;
+        }
+
+        .facts {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            gap: 9px 24px;
+            margin-top: 18px;
+        }
+
+        .facts dt {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--muted);
+        }
+
+        .facts dd {
+            margin: 0;
+            font-size: 15px;
+            color: var(--ink);
+        }
+
+        .facts .exact {
+            font-family: 'SF Mono', 'Consolas', 'Courier New', monospace;
+            font-size: 13.5px;
+            line-height: 1.55;
+        }
+
+        .watch {
+            font-size: 14px;
+            color: var(--muted);
+            margin-top: 16px;
+            padding-left: 14px;
+            border-left: 2px solid var(--border);
+        }
+
+        .watch strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 26px; }
+            .container { padding: 32px 16px; }
+            .facts { grid-template-columns: 1fr; gap: 2px 0; }
+            .facts dt { margin-top: 10px; }
+            .glance { font-size: 13px; }
+            .glance th, .glance td { padding: 9px 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">&larr; Go Back</a>
+        <header class="header">
+            <div class="header-label">Quick Reference</div>
+            <h1>Case Loads &amp; Your Notifications</h1>
+            <p class="subtitle">What Virtuous calls an Organizational Group, and exactly what each automatic notification means</p>
+            <p class="updated">Last updated: August 3, 2026</p>
+        </header>
+
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">&#x1F465;</div>
+                <div>
+                    <h2 class="section-title">Your Case Load</h2>
+                    <p class="section-subtitle">Organizational Groups in Virtuous</p>
+                </div>
+            </div>
+
+            <p>Your case load is stored in Virtuous as an <span class="term">Organizational Group</span>, a saved list of the contacts and individuals you are personally developing a relationship with. "Case load" and "Organizational Group" mean the same thing: the group is the Virtuous term, the case load is what we call it day to day.</p>
+
+            <p>Four automatic workflows run against that group. Each one checks your case load on a schedule, and when a contact matches, it creates a task assigned to you. Every task arrives two ways: as an email to your inbox, and as a task in the <span class="term">TASKS</span> panel on your Virtuous dashboard. Nothing on this page is something you create by hand.</p>
+
+            <p>Because every workflow is scoped to your group, every notification you receive is about one of your own partners.</p>
+
+            <!--
+                Internal list of current case load workers (not published on the page).
+                If someone asks whether they are covered, check this list and update it here
+                when a case load is added or removed.
+
+                David
+                Larry
+                Shelly
+                John-Mark
+                Omar
+                Mark
+                Charis
+                Shelli
+                Marvin
+                Francois
+            -->
+
+            <p>Case loads are set up per worker/volunteer, and the current list is kept internally rather than published here. If you are not sure whether you have a case load set up, or whether these workflows are running for you, just ask <a href="mailto:mark@mailboxclub.org" class="inline-link">Mark</a>.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">&#x1F4CB;</div>
+                <div>
+                    <h2 class="section-title">At a Glance</h2>
+                    <p class="section-subtitle">The four notifications, side by side</p>
+                </div>
+            </div>
+
+            <table class="glance">
+                <thead>
+                    <tr>
+                        <th>Notification</th>
+                        <th>Fires when</th>
+                        <th>Due in</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#birthday">Birthday</a></td>
+                        <td>An individual's birthday is one week away</td>
+                        <td class="due">6 days</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#thank-you">Thank You</a></td>
+                        <td>A contact gave a gift yesterday</td>
+                        <td class="due">7 days</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#prelapsed">Prelapsed Donor Alert</a></td>
+                        <td>A contact has not given in 6 months</td>
+                        <td class="due">7 days</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#past-due">Contact with Past Due Recurring Gifts</a></td>
+                        <td>A recurring gift schedule is Past Due</td>
+                        <td class="due">5 days</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">&#x1F514;</div>
+                <div>
+                    <h2 class="section-title">The Notifications</h2>
+                    <p class="section-subtitle">Trigger, exact wording, and due date for each</p>
+                </div>
+            </div>
+
+            <div class="entry" id="birthday">
+                <h3>Birthday</h3>
+                <p class="one-liner">A partner's birthday is a week out. Your cue to send a card or make a call in time for the day.</p>
+                <dl class="facts">
+                    <dt>Runs</dt>
+                    <dd>Daily, against your case load</dd>
+                    <dt>Fires when</dt>
+                    <dd>An individual on your case load has a birthday exactly one week from today</dd>
+                    <dt>Task title</dt>
+                    <dd class="exact">Birthday</dd>
+                    <dt>Task details</dt>
+                    <dd class="exact">This person's birthday is upcoming</dd>
+                    <dt>Due in</dt>
+                    <dd>6 days, which lands the day before the birthday</dd>
+                    <dt>Task type</dt>
+                    <dd>General</dd>
+                </dl>
+                <p class="watch"><strong>Watch for:</strong> this workflow reads the birthdate on the <span class="term">individual</span> record, not the contact. If a partner's birthday has never been entered in Virtuous, the workflow has nothing to match and no task will ever fire for them. In a household, each spouse needs their own birthdate filled in to get their own task.</p>
+            </div>
+
+            <div class="entry" id="thank-you">
+                <h3>Thank You</h3>
+                <p class="one-liner">Someone on your case load just gave. Reach out and thank them.</p>
+                <dl class="facts">
+                    <dt>Runs</dt>
+                    <dd>Daily, against your case load</dd>
+                    <dt>Fires when</dt>
+                    <dd>A contact on your case load gave a new gift yesterday</dd>
+                    <dt>Task title</dt>
+                    <dd class="exact">Thank You</dd>
+                    <dt>Task details</dt>
+                    <dd class="exact">One of you contacts gave recently. Reach out and let them know we are thankful.</dd>
+                    <dt>Due in</dt>
+                    <dd>7 days</dd>
+                    <dt>Task type</dt>
+                    <dd>General</dd>
+                </dl>
+                <p class="watch"><strong>Watch for:</strong> the scan looks at yesterday's gifts, so a gift given today reaches you tomorrow. If you do not work with giving data directly, this task is how you find out that a partner has donated.</p>
+            </div>
+
+            <div class="entry" id="prelapsed">
+                <h3>Prelapsed Donor Alert</h3>
+                <p class="one-liner">A partner is drifting. An early warning so you can re-engage before they lapse for good.</p>
+                <dl class="facts">
+                    <dt>Runs</dt>
+                    <dd>Daily, against your case load</dd>
+                    <dt>Fires when</dt>
+                    <dd>A contact on your case load has not given within the past 6 months</dd>
+                    <dt>Task title</dt>
+                    <dd class="exact">Alert -recent no giving (6 months)</dd>
+                    <dt>Task details</dt>
+                    <dd class="exact">This contact has not given within 6 months and tagged at "prelapsed"</dd>
+                    <dt>Due in</dt>
+                    <dd>7 days</dd>
+                    <dt>Task type</dt>
+                    <dd>General</dd>
+                </dl>
+                <p class="watch"><strong>Watch for:</strong> this is aimed at infrequent donor partners, the ones who give occasionally rather than on a recurring schedule, so a quiet stretch is a real signal. Recurring donors are covered by the Past Due workflow below instead. Contacts matched here also carry the <a href="tags-reference.html#system" class="inline-link">Prelapsed Donor tag</a>.</p>
+            </div>
+
+            <div class="entry" id="past-due">
+                <h3>Contact with Past Due Recurring Gifts</h3>
+                <p class="one-liner">A recurring partner's expected payment did not come through. Follow up and get the schedule back on track.</p>
+                <dl class="facts">
+                    <dt>Runs</dt>
+                    <dd>Daily, against your case load</dd>
+                    <dt>Fires when</dt>
+                    <dd>A contact on your case load has a recurring gift whose status is Past Due</dd>
+                    <dt>Task title</dt>
+                    <dd class="exact">Follow up on Past Due Recurring Gift</dd>
+                    <dt>Task details</dt>
+                    <dd class="exact">Check the attached Contact record's recurring gift schedule for missed payment details and reach out to update payment information and/or connect with donor.</dd>
+                    <dt>Due in</dt>
+                    <dd>5 days</dd>
+                    <dt>Past Due means</dt>
+                    <dd>One or more expected recurring gift payments have been missed</dd>
+                </dl>
+                <p class="watch"><strong>Watch for:</strong> Virtuous applies a <strong>30-day grace period</strong> after a missed payment before it changes the status to Past Due, so the task reaches you about a month after the payment was actually missed. Open the contact record and check the recurring gift schedule to see which payment was missed before you reach out. Most cases are an expired or replaced card rather than a decision to stop giving.</p>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <img src="assets/tmc-logo.png" alt="The Mailbox Club" style="width: 100px; height: auto; margin-bottom: 8px;"><br>
+            <p>CRM Training</p>
+            <a href="index.html" class="home-link">Home</a>
+        </footer>
+    </div>
+</body>
+</html>
