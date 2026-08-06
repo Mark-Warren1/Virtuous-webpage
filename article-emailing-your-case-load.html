@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <title>Emailing Your Case Load | Virtuous Training</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1f2937;
+            --paper: #ffffff;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+
+            /* House chrome, shared with the other article pages */
+            --accent: #0d9488;
+            --accent-light: #ccfbf1;
+
+            /* Three content colours: query, list, caution */
+            --query-color: #2563eb;
+            --query-light: #dbeafe;
+            --list-color: #7c3aed;
+            --list-light: #ede9fe;
+            --caution-color: #f59e0b;
+            --caution-light: #fffbeb;
+            --caution-text: #b45309;
+
+            /* Text-only, for "don't name it this" examples */
+            --warn-color: #dc2626;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f9fafb;
+            color: var(--ink);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .article-container {
+            max-width: 860px;
+            margin: 0 auto;
+            background: var(--paper);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .back-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            background: #2563eb;
+            text-decoration: none;
+            padding: 6px 16px;
+            border-radius: 4px;
+            margin: 16px 0 0 32px;
+        }
+
+        .back-link:hover { background: #1d4ed8; }
+
+        .home-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #fff;
+            text-decoration: none;
+            background: #9ca3af;
+            padding: 6px 18px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+
+        .home-link:hover { background: #6b7280; }
+
+        .article-header {
+            padding: 24px 32px 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .category-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.25;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+
+        .article-meta { font-size: 14px; color: var(--muted); }
+
+        .article-content { padding: 32px; }
+
+        .lead {
+            font-size: 18px;
+            color: var(--muted);
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .lead-links { margin-bottom: 28px; }
+
+        h2 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 48px;
+            margin-bottom: 16px;
+            color: var(--ink);
+        }
+
+        h3 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 19px;
+            font-weight: 700;
+            margin-top: 36px;
+            margin-bottom: 12px;
+            color: var(--ink);
+        }
+
+        h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: var(--ink);
+        }
+
+        p { margin-bottom: 20px; }
+        strong { font-weight: 600; color: var(--ink); }
+        em { font-style: italic; }
+
+        .body-list { margin: 0 0 20px 20px; }
+        .body-list li { margin-bottom: 8px; }
+        .body-list li:last-child { margin-bottom: 0; }
+
+        .code-inline {
+            font-family: 'SF Mono', 'Consolas', 'Courier New', monospace;
+            font-size: 13px;
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: var(--ink);
+        }
+
+        .cross-ref {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .cross-ref:hover { background: #99f6e4; }
+
+        /* ── Two-part concept cards ── */
+        .concept-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 28px 0;
+        }
+
+        .concept-card {
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .concept-card.list-card {
+            background: var(--list-light);
+            border: 2px solid var(--list-color);
+        }
+
+        .concept-card.query-card {
+            background: var(--query-light);
+            border: 2px solid var(--query-color);
+        }
+
+        .concept-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .concept-card.list-card .concept-label { color: var(--list-color); }
+        .concept-card.query-card .concept-label { color: var(--query-color); }
+
+        .concept-title {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+
+        .concept-answers {
+            font-size: 15px;
+            font-style: italic;
+            color: var(--muted);
+            margin-bottom: 14px;
+        }
+
+        .concept-card p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .concept-card p:last-child { margin-bottom: 0; }
+
+        .concept-seen {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* ── Flow visual ── */
+        .flow-visual {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            margin: 28px 0;
+            text-align: center;
+        }
+
+        .flow-visual .diagram-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .flow-stage {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .flow-stage.later { margin-top: 24px; }
+
+        /* Keeps the two "build first" items left-aligned with each other, so the
+           Email List reads as its own track rather than an output of the query row. */
+        .flow-tracks { display: inline-block; }
+        .flow-tracks .flow-row { justify-content: flex-start; }
+
+        .flow-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .flow-row:last-of-type { margin-bottom: 0; }
+
+        .flow-box {
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .flow-box.query { background: var(--query-light); border: 2px solid var(--query-color); color: var(--query-color); }
+        .flow-box.list { background: var(--list-light); border: 2px solid var(--list-color); color: var(--list-color); }
+        .flow-box.neutral { background: white; border: 2px solid var(--border); color: var(--ink); }
+
+        .flow-arrow { font-size: 20px; color: var(--muted); }
+
+        .flow-note {
+            font-size: 13px;
+            color: var(--muted);
+            margin: 18px 0 0;
+        }
+
+        /* ── Callouts ── */
+        .callout {
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            margin: 28px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .callout.amber { background: var(--caution-light); border-color: var(--caution-color); }
+        .callout.blue { background: var(--query-light); border-color: var(--query-color); }
+        .callout.purple { background: var(--list-light); border-color: var(--list-color); }
+
+        .callout-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .callout.amber .callout-label { color: var(--caution-text); }
+        .callout.blue .callout-label { color: var(--query-color); }
+        .callout.purple .callout-label { color: var(--list-color); }
+
+        .callout p { margin: 0; font-size: 15px; }
+        .callout p + p { margin-top: 12px; }
+
+        /* ── Step blocks ── */
+        .steps {
+            background: white;
+            border: 2px solid var(--query-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 24px 0;
+        }
+
+        .steps.list-steps { border-color: var(--list-color); }
+
+        .steps-header {
+            background: var(--query-light);
+            padding: 14px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--query-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .steps.list-steps .steps-header { background: var(--list-light); color: var(--list-color); }
+
+        .step {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 32px 1fr;
+            gap: 12px;
+            align-items: start;
+        }
+
+        .step:last-child { border-bottom: none; }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--query-color);
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .steps.list-steps .step-num { background: var(--list-color); }
+
+        .step-content { font-size: 14px; }
+        .step-content strong { color: var(--ink); }
+        .step-detail { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+        /* ── Query line builder ── */
+        .qline {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .qcell {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px 10px;
+        }
+
+        .qcell .qlabel {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--muted);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .qcell .qvalue {
+            font-family: 'SF Mono', 'Consolas', 'Courier New', monospace;
+            font-size: 13px;
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        /* ── Tables ── */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin: 24px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .compare-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border);
+            background: #f8fafc;
+            color: var(--muted);
+        }
+
+        .compare-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .compare-table td:first-child {
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .compare-table tr:last-child td { border-bottom: none; }
+
+        .compare-table .pick {
+            background: var(--accent-light);
+        }
+
+        .pick-flag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: var(--accent);
+            color: white;
+            padding: 2px 7px;
+            border-radius: 3px;
+            margin-left: 6px;
+            vertical-align: 1px;
+        }
+
+        /* ── Naming examples ── */
+        .naming {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin: 24px 0;
+        }
+
+        .naming h4 {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+            margin: 0 0 12px;
+        }
+
+        .naming ul { margin: 0 0 4px; padding-left: 20px; }
+        .naming li { font-size: 14px; margin-bottom: 6px; }
+        .naming li:last-child { margin-bottom: 0; }
+
+        .naming .good { color: var(--ink); }
+        .naming .bad { color: var(--warn-color); }
+
+        .naming-desc {
+            font-size: 13px;
+            color: var(--muted);
+            margin: 10px 0 0;
+        }
+
+        .naming .naming-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        /* ── Summary ── */
+        .summary {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 10px;
+            padding: 24px;
+            margin: 36px 0 0;
+        }
+
+        .summary h3 {
+            font-family: 'Inter', -apple-system, sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #166534;
+            margin: 0 0 12px;
+        }
+
+        .summary ul { margin: 0; padding-left: 20px; }
+        .summary li { font-size: 14px; margin-bottom: 8px; color: var(--ink); }
+        .summary li:last-child { margin-bottom: 0; }
+
+        /* ── Footer ── */
+        .article-footer {
+            padding: 24px 32px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            h1 { font-size: 26px; }
+            .article-header, .article-content, .article-footer { padding-left: 20px; padding-right: 20px; }
+            .concept-pair { grid-template-columns: 1fr; }
+            .qline { grid-template-columns: 1fr; }
+            /* Stack the flow diagram: wrapping it horizontally leaves arrows
+               dangling at the end of a line pointing at nothing. */
+            .flow-tracks { display: block; }
+            .flow-row { flex-direction: column; gap: 8px; }
+            .flow-tracks .flow-row { align-items: center; }
+            .flow-arrow { transform: rotate(90deg); }
+            .naming .naming-split { grid-template-columns: 1fr; gap: 16px; }
+            .compare-table { font-size: 13px; }
+            .compare-table th, .compare-table td { padding: 9px 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="article-container">
+        <a href="index.html" class="back-link">&larr; Go Back</a>
+
+        <header class="article-header">
+            <div class="category-label">How-To</div>
+            <h1>Emailing Your Case Load</h1>
+            <p class="article-meta">8 min read · Sending one email to everyone you personally work with</p>
+        </header>
+
+        <main class="article-content">
+            <p class="lead">Your case load already lives in Virtuous as an Organizational Group. This walks through turning that group into an email that goes out from you, personally, to the partners on it, and that respects the preferences they have set.</p>
+            <p class="lead-links"><a href="caseloads-reference.html" class="cross-ref">&rarr; What a case load is in Virtuous</a></p>
+
+            <h2>The Idea Behind It</h2>
+
+            <p>Most email tools have one concept: a list. You put people on it, you email the list. Virtuous splits that into <strong>two separate things</strong>, and almost every mistake people make with Virtuous email comes from treating them as one.</p>
+
+            <div class="concept-pair">
+                <div class="concept-card list-card">
+                    <div class="concept-label">Required on every email</div>
+                    <div class="concept-title">Email List</div>
+                    <p class="concept-answers">"What kind of mail is this?"</p>
+                    <p>A subscription channel. It is the thing a partner unsubscribes <em>from</em>. If someone opts out of your updates, they are opting out of this list, not out of everything TMC sends.</p>
+                    <p class="concept-seen">The name and description are <strong>visible to donors</strong> on the subscription preferences page.</p>
+                </div>
+                <div class="concept-card query-card">
+                    <div class="concept-label">How you pick recipients</div>
+                    <div class="concept-title">Contact Query</div>
+                    <p class="concept-answers">"Who gets it this time?"</p>
+                    <p>The audience for this one send. It is a live filter: it asks Virtuous, at send time, who is currently on your case load and eligible to be emailed.</p>
+                    <p class="concept-seen">Internal only. Donors never see query names.</p>
+                </div>
+            </div>
+
+            <p>The list is the <em>channel</em>. The query is the <em>audience</em>. You need both, and you build the query first.</p>
+
+            <div class="flow-visual">
+                <div class="diagram-label">What you're actually building</div>
+
+                <div class="flow-stage">Build these before you open the wizard</div>
+                <div class="flow-tracks">
+                    <div class="flow-row">
+                        <span class="flow-box neutral">Your case load</span>
+                        <span class="flow-arrow">&rarr;</span>
+                        <span class="flow-box query">Contact Query</span>
+                    </div>
+                    <div class="flow-row">
+                        <span class="flow-box list">Email List</span>
+                    </div>
+                </div>
+
+                <div class="flow-stage later">Then work through the wizard</div>
+                <div class="flow-row">
+                    <span class="flow-box list">Setup</span>
+                    <span class="flow-arrow">&rarr;</span>
+                    <span class="flow-box neutral">Design</span>
+                    <span class="flow-arrow">&rarr;</span>
+                    <span class="flow-box query">Target</span>
+                    <span class="flow-arrow">&rarr;</span>
+                    <span class="flow-box neutral">Specify</span>
+                    <span class="flow-arrow">&rarr;</span>
+                    <span class="flow-box neutral">Send</span>
+                </div>
+
+                <p class="flow-note">The Email List is attached at Setup. The Contact Query is chosen at Target. Both need to exist before you start.</p>
+            </div>
+
+            <div class="callout amber">
+                <div class="callout-label">Before you start</div>
+                <p>Create the Email List <strong>at least 15 minutes</strong> before you send. Virtuous needs time to generate it, and a list created moments before a send can fail. If you are building the list and the email in one sitting, do the list first and the wizard second. The writing will eat the 15 minutes on its own.</p>
+            </div>
+
+            <h2>Step 1: Build the Query</h2>
+
+            <p>This is the step that decides who receives the email, so it is worth doing carefully. Open <strong>Query Tool</strong> from the left sidebar and start a new <strong>Contact Query</strong>.</p>
+
+            <div class="steps">
+                <div class="steps-header">Query: your case load, minus opt-outs</div>
+
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <strong>Pull in your case load</strong>
+                        <div class="qline">
+                            <div class="qcell"><span class="qlabel">Field</span><span class="qvalue">Organization Group</span></div>
+                            <div class="qcell"><span class="qlabel">Operator</span><span class="qvalue">Is</span></div>
+                            <div class="qcell"><span class="qlabel">Value</span><span class="qvalue">Your case load</span></div>
+                        </div>
+                        <div class="step-detail">Start typing your name in the Value box and pick your group. Read it twice before moving on. Several case-load names on the list look nearly identical, and one wrong letter sends your email to someone else's partners.</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <strong>Remove anyone who has opted out of email</strong>
+                        <div class="qline">
+                            <div class="qcell"><span class="qlabel">Field</span><span class="qvalue">Tag</span></div>
+                            <div class="qcell"><span class="qlabel">Operator</span><span class="qvalue">Does Not Include</span></div>
+                            <div class="qcell"><span class="qlabel">Value</span><span class="qvalue">No email</span></div>
+                        </div>
+                        <div class="step-detail">Not optional. This tag means the partner asked us to stop emailing them. <a href="tags-reference.html" class="cross-ref">&rarr; Tags reference</a></div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <strong>If you are asking for anything, also remove "No appeals"</strong>
+                        <div class="qline">
+                            <div class="qcell"><span class="qlabel">Field</span><span class="qvalue">Tag</span></div>
+                            <div class="qcell"><span class="qlabel">Operator</span><span class="qvalue">Does Not Include</span></div>
+                            <div class="qcell"><span class="qlabel">Value</span><span class="qvalue">No appeals</span></div>
+                        </div>
+                        <div class="step-detail">Skip this line if the email is purely informational: a ministry update, a thank-you, a prayer request. Include it the moment there is an ask of any kind.</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <strong>Join the lines with "And"</strong>
+                        <div class="step-detail">All conditions must be true at once: on my case load, <em>and</em> not tagged No email, <em>and</em> not tagged No appeals. "Or" here would email your entire database.</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-content">
+                        <strong>Run it and look at the number</strong>
+                        <div class="step-detail">Does the count roughly match the size of your case load? If it is dramatically larger, a condition is wrong. Stop and check before going further. This is your last cheap chance to catch a mistake.</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">6</div>
+                    <div class="step-content">
+                        <strong>Save it with a name you will recognize in a year</strong>
+                        <div class="step-detail">Something like <span class="code-inline">Case Load &ndash; [Your Name] &ndash; Emailable</span>. Reuse this same query for every future send. Partners added to your case load next month will already be in it, and anyone who asks to stop receiving email drops out automatically, without you having to remember them.</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Step 2: Create the Email List</h2>
+
+            <p>Go to <strong>Marketing &rarr; Email</strong>, open the <strong>Actions</strong> menu in the top right, and choose <strong>Manage Lists</strong>, then <strong>Create a List</strong>.</p>
+
+            <div class="steps list-steps">
+                <div class="steps-header">List: the channel your partners subscribe to</div>
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <strong>Name it for the donor, not for the database</strong>
+                        <div class="step-detail">The name and description both appear on the subscription preferences page your partners see. Write them the way you would write a magazine subscription line, not an internal label.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <strong>Write a description that says what they will get</strong>
+                        <div class="step-detail">One sentence. Frequency and content. This is what a partner reads when deciding whether to stay subscribed.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <strong>Leave "Default" off unless it belongs to everyone</strong>
+                        <div class="step-detail">Default lists show on the preferences page for every recipient. A personal case-load list is not that.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <strong>Save, then wait 15 minutes before sending anything</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="naming">
+                <h4>Naming your list</h4>
+                <div class="naming-split">
+                    <div>
+                        <ul>
+                            <li class="good">Updates from [Your Name]</li>
+                            <li class="good">Ministry Notes from [Your Name]</li>
+                            <li class="good">Personal Updates from Your TMC Contact</li>
+                        </ul>
+                        <p class="naming-desc">Description: <em>Occasional personal updates, news, and prayer requests from [Your Name] at The Mailbox Club.</em></p>
+                    </div>
+                    <div>
+                        <ul>
+                            <li class="bad">[Your Name] Case Load</li>
+                            <li class="bad">Aug 2026 One-Off Send</li>
+                            <li class="bad">caseload_email_v2</li>
+                        </ul>
+                        <p class="naming-desc">These are internal names. Partners would see them and wonder what a case load is, or why they are on a list called v2.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout purple">
+                <div class="callout-label">Make one list, not one per send</div>
+                <p>It is tempting to create a fresh list for each email. Don't. TMC is capped at 200 email lists total, a one-off list clutters the preferences page your partners see, and unsubscribes recorded against a throwaway list teach us nothing.</p>
+                <p>Create <strong>one list per case-load worker</strong> and reuse it for every send. Over time it becomes a real record of who hears from you.</p>
+            </div>
+
+            <h2>In the Wizard</h2>
+
+            <p>From <strong>Marketing &rarr; Email</strong>, choose <strong>Actions &rarr; Create an Email</strong>, then pick the <strong>visual builder</strong>. The wizard runs across five steps shown along the bottom of the screen, and the rest of this guide follows them in order.</p>
+
+            <h3>Setup</h3>
+
+            <table class="compare-table">
+                <thead>
+                    <tr><th>Field</th><th>What to put</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <td>Internal only, never seen by partners. Date plus purpose works well: <span class="code-inline">2026-08 Case Load Update &ndash; [Your Name]</span></td>
+                    </tr>
+                    <tr>
+                        <td>Email List</td>
+                        <td>The list you made in Step 2.</td>
+                    </tr>
+                    <tr>
+                        <td>Segment</td>
+                        <td>Optional. Links this email to a campaign so giving it inspires gets tracked. Use it if this send belongs to a campaign; leave blank for a personal check-in. <a href="campaigns-reference.html" class="cross-ref">&rarr; Segment codes</a></td>
+                    </tr>
+                    <tr>
+                        <td>Subject</td>
+                        <td>What lands in the inbox. Personal and specific beats clever.</td>
+                    </tr>
+                    <tr>
+                        <td>From Name</td>
+                        <td><strong>Your own name.</strong> This is the single biggest lever on whether the email gets opened.</td>
+                    </tr>
+                    <tr>
+                        <td>From Email</td>
+                        <td>Your TMC address, so replies come back to you rather than the main inbox.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Set From Name and From Email to <em>you</em>, every time. Your partners know you, and they have no relationship with a generic ministry address. A name they recognize, with a reply address that reaches that same person, is the whole point of having case loads in the first place.</p>
+
+            <h3>Design</h3>
+
+            <p>The builder has three tabs on the right: <strong>Content</strong>, <strong>Rows</strong>, and <strong>Settings</strong>. Work right to left. Settings first for fonts and background, then Rows for the layout, then Content to fill it in. Setting up the design after you have written everything means redoing work.</p>
+
+            <h4>Write it</h4>
+
+            <p>Drag a <strong>Paragraph</strong> block in and type. Click inside it and the toolbar appears, including two things worth knowing:</p>
+
+            <ul class="body-list">
+                <li><strong>Merge tags</strong> personalize the text, most commonly with the recipient's first name.</li>
+                <li><strong>Special Links</strong> insert unsubscribe options. If you add none, Virtuous puts a global unsubscribe link in the footer for you.</li>
+            </ul>
+
+            <div class="callout blue">
+                <div class="callout-label">A note on format</div>
+                <p>A case-load email is a personal note, not a newsletter. Heavy design works against you here. A plain message with a real greeting and a real signature reads like it came from a person, because it did. Save the multi-column layouts and hero images for organizational sends.</p>
+            </div>
+
+            <h4>Preview and test</h4>
+
+            <p>Use <strong>Preview</strong> under the Actions menu to see desktop and mobile, and send yourself a test email to confirm it renders properly.</p>
+
+            <div class="callout amber">
+                <div class="callout-label">Expected in test emails</div>
+                <p>Merge tags and your custom From Name will <strong>not</strong> populate in a test send. A greeting that reads as a blank or a placeholder, and a test that arrives from the default TMC sender, are both normal. Check the layout and the wording in a test; trust the merge tags to fill in on the real send.</p>
+            </div>
+
+            <h4>Publish before you send</h4>
+
+            <p>Publishing is a separate action from sending, and skipping it is the most common way a case-load email goes out wrong.</p>
+
+            <p>Think of publishing as sending a document to the printer. You can keep editing the file afterward, and your screen will show those edits, but the page in your hand is the version you printed. Virtuous always sends the <strong>most recently published version</strong>. Edits made after publishing stay in the editor and never reach anyone.</p>
+
+            <div class="callout amber">
+                <div class="callout-label">The rule</div>
+                <p>Fixed a typo? Publish again. Every time you change anything after publishing, publish again before you send. When in doubt, publish. There is no penalty for publishing twice.</p>
+            </div>
+
+            <h3>Target</h3>
+
+            <p>Click Next to reach Target. Virtuous offers three ways to choose recipients.</p>
+
+            <table class="compare-table">
+                <thead>
+                    <tr><th>Option</th><th>What it does</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Send to Email List</td>
+                        <td>Emails everyone currently subscribed to the list. "Show Advanced Options" lets you narrow it with a query.</td>
+                    </tr>
+                    <tr class="pick">
+                        <td>Use Contact Query <span class="pick-flag">Use this</span></td>
+                        <td>Emails the people your query returns, and lets you choose which individuals within each household receive it.</td>
+                    </tr>
+                    <tr>
+                        <td>Use Individual Query</td>
+                        <td>Emails specific individuals rather than contacts. Not what you want for a household-based case load.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Choose <strong>Use Contact Query</strong> and select the query you saved in Step 1. Virtuous then asks which individuals within each contact should receive it.</p>
+
+            <h4>Primary, Primary and Secondary, or All</h4>
+
+            <p>A Contact in Virtuous is usually a household, and a household can contain more than one person. This setting decides who inside it gets the email. In every case Virtuous uses each person's <strong>primary email address</strong>. Other addresses on their record are never used for marketing email.</p>
+
+            <table class="compare-table">
+                <thead>
+                    <tr><th>Setting</th><th>Who receives it</th><th>When to use it</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Primary</td>
+                        <td>Only the primary individual on the contact record.</td>
+                        <td>One message per household, to the person listed first. Misses a spouse who also knows you.</td>
+                    </tr>
+                    <tr class="pick">
+                        <td>Primary and Secondary <span class="pick-flag">Usual pick</span></td>
+                        <td>The primary individual, plus the secondary individual where one has an email address on file.</td>
+                        <td>Reaches both spouses in a household. The right default for case-load work, where the relationship is usually with the couple.</td>
+                    </tr>
+                    <tr>
+                        <td>All</td>
+                        <td>Every individual listed under the contact record.</td>
+                        <td>Can pull in adult children or other members attached to the record. Broader than most personal outreach calls for.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout blue">
+                <div class="callout-label">Worth knowing</div>
+                <p>Sending by Contact Query automatically adds everyone who receives the email to the Email List you chose at Setup. That is a feature, not a side effect: it is how your list builds itself over time, and how unsubscribes get recorded against the right channel.</p>
+            </div>
+
+            <h3>Specify</h3>
+
+            <p>The Specify step asks when it goes out. <strong>Send it Right Now</strong> does what it says. To schedule, pick a date on the calendar, then click the clock to set a time, then confirm with <strong>Send Later</strong>. Check the time zone.</p>
+
+            <div class="callout amber">
+                <div class="callout-label">Scheduled emails freeze 24 hours ahead</div>
+                <p>While the status reads <strong>Planned</strong>, you can still make changes. At the 24-hour mark the status becomes <strong>Scheduled</strong>, and both the recipient list and the content lock. Anyone added to your case load after that point will not receive it.</p>
+                <p>To change a scheduled email, cancel it and reschedule rather than editing in place. Cancellations must happen at least 15 minutes before the send time; after that the email may go out as originally planned.</p>
+            </div>
+
+            <h3>Send</h3>
+
+            <p>The final step confirms your selections. Read the recipient count one more time. It should still look like the number you saw when you ran the query. Then send.</p>
+
+            <p>Afterward, the email's activity view shows opens, clicks, bounces, and unsubscribes. Unsubscribes are worth checking: someone leaving your list is a relationship signal, not just a statistic.</p>
+
+            <div class="summary">
+                <h3>The short version</h3>
+                <ul>
+                    <li><strong>The list is the channel; the query is the audience.</strong> You need both, and the query does the real work.</li>
+                    <li><strong>Build the query first</strong>, always excluding the "No email" tag, and "No appeals" too if you are asking for anything.</li>
+                    <li><strong>Create your Email List 15 minutes ahead</strong>, name it for the donor's eyes, and reuse the same list for every send.</li>
+                    <li><strong>Send from your own name and address</strong> so replies reach you.</li>
+                    <li><strong>Publish after every edit.</strong> Virtuous sends the last published version, not what is on your screen.</li>
+                    <li><strong>Target by Contact Query</strong>, usually Primary and Secondary so both spouses hear from you.</li>
+                    <li><strong>Check the recipient count</strong> at the query and again at the final confirmation.</li>
+                </ul>
+            </div>
+        </main>
+
+        <footer class="article-footer">
+            <img src="assets/tmc-logo.png" alt="The Mailbox Club" style="width: 100px; height: auto; margin-bottom: 8px;"><br>
+            <p>CRM Training</p>
+            <a href="index.html" class="home-link">Home</a>
+        </footer>
+    </div>
+</body>
+</html>
