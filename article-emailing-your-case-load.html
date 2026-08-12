@@ -582,7 +582,7 @@
                 </div>
             </div>
 
-            <p>The list is the <em>channel</em>. The query is the <em>audience</em>. You need both, and you build the query first.</p>
+            <p>The list is the <em>channel</em>. The query is the <em>audience</em>. Virtuous requires both on every email, and both have to exist before you open the wizard.</p>
 
             <div class="flow-visual">
                 <div class="diagram-label">What you're actually building</div>
@@ -590,12 +590,12 @@
                 <div class="flow-stage">Build these before you open the wizard</div>
                 <div class="flow-tracks">
                     <div class="flow-row">
+                        <span class="flow-box list">Email List</span>
+                    </div>
+                    <div class="flow-row">
                         <span class="flow-box neutral">Your case load</span>
                         <span class="flow-arrow">&rarr;</span>
                         <span class="flow-box query">Contact Query</span>
-                    </div>
-                    <div class="flow-row">
-                        <span class="flow-box list">Email List</span>
                     </div>
                 </div>
 
@@ -620,7 +620,72 @@
                 <p>Create the Email List <strong>at least 15 minutes</strong> before you send. Virtuous needs time to generate it, and a list created moments before a send can fail. If you are building the list and the email in one sitting, do the list first and the wizard second. The writing will eat the 15 minutes on its own.</p>
             </div>
 
-            <h2>Step 1: Build the Query</h2>
+            <h2>Step 1: Create the Email List</h2>
+
+            <p>Virtuous requires an Email List on every email, even when a query decides who actually receives it. The list is not the audience here. It is what your partners see on their subscription preferences page, and it is what they unsubscribe from.</p>
+
+            <p>Go to <strong>Marketing &rarr; Email</strong>, open the <strong>Actions</strong> menu in the top right, and choose <strong>Manage Lists</strong>, then <strong>Create a List</strong>.</p>
+
+            <div class="steps list-steps">
+                <div class="steps-header">List: the channel your partners subscribe to</div>
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <strong>Name it for the donor, not for the database</strong>
+                        <div class="step-detail">The name and description both appear on the subscription preferences page your partners see. Write them the way you would write a magazine subscription line, not an internal label.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <strong>Write a description that says what they will get</strong>
+                        <div class="step-detail">One sentence. Frequency and content. This is what a partner reads when deciding whether to stay subscribed.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <strong>Leave "Default" off unless it belongs to everyone</strong>
+                        <div class="step-detail">Default lists show on the preferences page for every recipient. A personal case-load list is not that.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <strong>Save, then wait 15 minutes before sending anything</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="naming">
+                <h4>Naming your list</h4>
+                <div class="naming-split">
+                    <div>
+                        <ul>
+                            <li class="good">Updates from [Your Name]</li>
+                            <li class="good">Ministry Notes from [Your Name]</li>
+                            <li class="good">Personal Updates from Your TMC Contact</li>
+                        </ul>
+                        <p class="naming-desc">Description: <em>Occasional personal updates, news, and prayer requests from [Your Name] at The Mailbox Club.</em></p>
+                    </div>
+                    <div>
+                        <ul>
+                            <li class="bad">[Your Name] Case Load</li>
+                            <li class="bad">Aug 2026 One-Off Send</li>
+                            <li class="bad">caseload_email_v2</li>
+                        </ul>
+                        <p class="naming-desc">These are internal names. Partners would see them and wonder what a case load is, or why they are on a list called v2.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout purple">
+                <div class="callout-label">Make one list, not one per send</div>
+                <p>It is tempting to create a fresh list for each email. Don't. TMC is capped at 200 email lists total, a one-off list clutters the preferences page your partners see, and unsubscribes recorded against a throwaway list teach us nothing.</p>
+                <p>Create <strong>one list per case-load worker</strong> and reuse it for every send. Over time it becomes a real record of who hears from you.</p>
+            </div>
+
+            <h2>Step 2: Build the Query</h2>
 
             <p>This is the step that decides who receives the email, so it is worth doing carefully. Open <strong>Query Tool</strong> from the left sidebar and start a new <strong>Contact Query</strong>.</p>
 
@@ -691,69 +756,6 @@
                 </div>
             </div>
 
-            <h2>Step 2: Create the Email List</h2>
-
-            <p>Go to <strong>Marketing &rarr; Email</strong>, open the <strong>Actions</strong> menu in the top right, and choose <strong>Manage Lists</strong>, then <strong>Create a List</strong>.</p>
-
-            <div class="steps list-steps">
-                <div class="steps-header">List: the channel your partners subscribe to</div>
-                <div class="step">
-                    <div class="step-num">1</div>
-                    <div class="step-content">
-                        <strong>Name it for the donor, not for the database</strong>
-                        <div class="step-detail">The name and description both appear on the subscription preferences page your partners see. Write them the way you would write a magazine subscription line, not an internal label.</div>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-num">2</div>
-                    <div class="step-content">
-                        <strong>Write a description that says what they will get</strong>
-                        <div class="step-detail">One sentence. Frequency and content. This is what a partner reads when deciding whether to stay subscribed.</div>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-num">3</div>
-                    <div class="step-content">
-                        <strong>Leave "Default" off unless it belongs to everyone</strong>
-                        <div class="step-detail">Default lists show on the preferences page for every recipient. A personal case-load list is not that.</div>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-num">4</div>
-                    <div class="step-content">
-                        <strong>Save, then wait 15 minutes before sending anything</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="naming">
-                <h4>Naming your list</h4>
-                <div class="naming-split">
-                    <div>
-                        <ul>
-                            <li class="good">Updates from [Your Name]</li>
-                            <li class="good">Ministry Notes from [Your Name]</li>
-                            <li class="good">Personal Updates from Your TMC Contact</li>
-                        </ul>
-                        <p class="naming-desc">Description: <em>Occasional personal updates, news, and prayer requests from [Your Name] at The Mailbox Club.</em></p>
-                    </div>
-                    <div>
-                        <ul>
-                            <li class="bad">[Your Name] Case Load</li>
-                            <li class="bad">Aug 2026 One-Off Send</li>
-                            <li class="bad">caseload_email_v2</li>
-                        </ul>
-                        <p class="naming-desc">These are internal names. Partners would see them and wonder what a case load is, or why they are on a list called v2.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="callout purple">
-                <div class="callout-label">Make one list, not one per send</div>
-                <p>It is tempting to create a fresh list for each email. Don't. TMC is capped at 200 email lists total, a one-off list clutters the preferences page your partners see, and unsubscribes recorded against a throwaway list teach us nothing.</p>
-                <p>Create <strong>one list per case-load worker</strong> and reuse it for every send. Over time it becomes a real record of who hears from you.</p>
-            </div>
-
             <h2>In the Wizard</h2>
 
             <p>From <strong>Marketing &rarr; Email</strong>, choose <strong>Actions &rarr; Create an Email</strong>, then pick the <strong>visual builder</strong>. The wizard runs across five steps shown along the bottom of the screen, and the rest of this guide follows them in order.</p>
@@ -771,7 +773,7 @@
                     </tr>
                     <tr>
                         <td>Email List</td>
-                        <td>The list you made in Step 2.</td>
+                        <td>The list you made in Step 1. Required, even though the query will decide who actually receives this email.</td>
                     </tr>
                     <tr>
                         <td>Segment</td>
@@ -856,7 +858,9 @@
                 </tbody>
             </table>
 
-            <p>Choose <strong>Use Contact Query</strong> and select the query you saved in Step 1. Virtuous then asks which individuals within each contact should receive it.</p>
+            <p>Choose <strong>Use Contact Query</strong> and select the query you saved in Step 2. Virtuous then asks which individuals within each contact should receive it.</p>
+
+            <p>Choosing a query here <strong>overrides the Email List as the recipient set</strong>. The list would otherwise have been the audience; now the query decides who receives this email. The list stays attached as the channel your partners can unsubscribe from, which is why it is still worth naming well.</p>
 
             <h4>Primary, Primary and Secondary, or All</h4>
 
@@ -909,9 +913,9 @@
             <div class="summary">
                 <h3>The short version</h3>
                 <ul>
-                    <li><strong>The list is the channel; the query is the audience.</strong> You need both, and the query does the real work.</li>
-                    <li><strong>Build the query first</strong>, always excluding the "No email" tag, and "No appeals" too if you are asking for anything.</li>
-                    <li><strong>Create your Email List 15 minutes ahead</strong>, name it for the donor's eyes, and reuse the same list for every send.</li>
+                    <li><strong>The list is the channel; the query is the audience.</strong> Virtuous requires both, and the query does the real work.</li>
+                    <li><strong>Create your Email List first</strong>, at least 15 minutes ahead, name it for the donor's eyes, and reuse the same list for every send.</li>
+                    <li><strong>Then build the query</strong>, always excluding the "No email" tag, and "No appeals" too if you are asking for anything.</li>
                     <li><strong>Send from your own name and address</strong> so replies reach you.</li>
                     <li><strong>Publish after every edit.</strong> Virtuous sends the last published version, not what is on your screen.</li>
                     <li><strong>Target by Contact Query</strong>, usually Primary and Secondary so both spouses hear from you.</li>
